@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ARLAN WEAR — Luxury Fashion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;900&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root{--black:#080808;--deep:#111111;--card:#161616;--border:#2a2a2a;--gold:#c9a84c;--gold-light:#dfc270;--cream:#f0e6c8;--white:#faf6ee;--muted:#8a7a65;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{background:var(--black);color:var(--cream);font-family:'EB Garamond',serif;overflow-x:hidden;}
+button,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+img{display:block;width:100%;height:100%;object-fit:cover;}
+@media(hover:hover)and(pointer:fine){body{cursor:none;}button,a{cursor:none!important;}}
+.cursor{width:7px;height:7px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
+.cursor-ring{width:28px;height:28px;border:1px solid rgba(201,168,76,0.4);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.15s;}
+@media(hover:none),(pointer:coarse){.cursor,.cursor-ring{display:none!important;}button,a{cursor:pointer!important;}}
+
+/* NAV */
+.main-nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;background:rgba(8,8,8,0.97);border-bottom:1px solid rgba(201,168,76,0.1);backdrop-filter:blur(20px);}
+.nav-logo{font-family:'Cinzel',serif;font-size:clamp(13px,1.4vw,18px);font-weight:900;letter-spacing:0.35em;color:var(--gold);text-decoration:none;}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.2em;color:var(--cream);text-decoration:none;opacity:0.6;transition:opacity 0.3s,color 0.3s;}
+.nav-links a:hover{opacity:1;color:var(--gold);}
+.nav-right{display:flex;align-items:center;gap:0.8rem;}
+.btn-signin{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.18em;background:none;border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:0.5rem 1rem;}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;background:none;border:none;padding:6px;}
+.hamburger span{display:block;width:100%;height:1px;background:var(--gold);transition:transform 0.3s,opacity 0.3s;}
+.hamburger.open span:nth-child(1){transform:translateY(6px)rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-6px)rotate(-45deg);}
+@media(max-width:1024px){.hamburger{display:flex;}}
+
+/* MOBILE MENU */
+.mobile-menu{position:fixed;inset:0;z-index:490;background:rgba(8,8,8,0.99);display:flex;flex-direction:column;align-items:center;justify-content:center;transform:translateX(-100%);transition:transform 0.4s cubic-bezier(0.77,0,0.175,1);}
+.mobile-menu.open{transform:translateX(0);}
+.mm-logo{font-family:'Cinzel',serif;font-size:clamp(12px,1.2vw,16px);font-weight:900;letter-spacing:0.4em;color:var(--gold);margin-bottom:2rem;}
+.mobile-menu a{font-family:'Cinzel',serif;font-size:clamp(26px,7vw,44px);font-weight:600;letter-spacing:0.12em;color:var(--white);text-decoration:none;padding:0.7rem 2rem;border-bottom:1px solid rgba(201,168,76,0.07);width:100%;text-align:center;display:block;transition:color 0.3s;}
+.mobile-menu a:hover,.mobile-menu a:active{color:var(--gold);}
+.mm-btn{margin-top:2rem;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.25em;background:var(--gold);color:var(--black);border:none;padding:0.9rem 2.5rem;}
+
+/* HERO */
+#hero{height:100vh;min-height:600px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(160deg,rgba(8,8,8,0.1) 0%,rgba(8,8,8,0.6) 50%,rgba(8,8,8,1) 100%),url('fashionable-modern-rococo-style.jpg')center/cover no-repeat;animation:heroZoom 14s ease-out forwards;}
+@keyframes heroZoom{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 2rem;}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:clamp(10px,0.9vw,12px);letter-spacing:0.5em;color:var(--gold);margin-bottom:1.5rem;opacity:0;animation:fadeUp 1s 0.4s forwards;}
+.hero-title{font-family:'Cinzel',serif;font-size:clamp(52px,10vw,140px);font-weight:900;line-height:0.88;color:var(--white);margin-bottom:1rem;opacity:0;animation:fadeUp 1s 0.65s forwards;}
+.hero-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;color:var(--gold-light);font-size:0.55em;display:block;}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,2vw,22px);font-style:italic;color:var(--cream);opacity:0;animation:fadeUp 1s 0.85s forwards;margin-bottom:2.5rem;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;opacity:0;animation:fadeUp 1s 1.05s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.btn-gold{font-family:'Cinzel',serif;font-size:clamp(11px,0.9vw,13px);letter-spacing:0.25em;background:var(--gold);color:var(--black);padding:0.9rem 2.2rem;text-decoration:none;display:inline-block;transition:background 0.3s;}
+.btn-gold:hover{background:var(--gold-light);}
+.btn-outline{font-family:'Cinzel',serif;font-size:clamp(11px,0.9vw,13px);letter-spacing:0.25em;border:1px solid var(--gold);color:var(--gold);padding:0.9rem 2.2rem;text-decoration:none;display:inline-block;transition:background 0.3s,color 0.3s;}
+.btn-outline:hover{background:var(--gold);color:var(--black);}
+
+/* DIVIDER */
+.divider{display:flex;align-items:center;gap:1.5rem;padding:2rem 4rem;}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,0.25),transparent);}
+.divider span{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.4em;color:var(--gold);opacity:0.5;white-space:nowrap;}
+
+/* SECTION LABELS */
+.sec-label{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.4em;color:var(--gold);margin-bottom:0.8rem;display:flex;align-items:center;gap:0.8rem;}
+.sec-label::before{content:'';width:24px;height:1px;background:var(--gold);}
+.sec-title{font-family:'Cinzel',serif;font-size:clamp(24px,3.5vw,48px);font-weight:600;color:var(--white);line-height:1.1;margin-bottom:0.8rem;}
+.sec-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;color:var(--gold-light);display:block;}
+
+/* CATEGORIES */
+#categories{padding:5rem 4rem 2rem;}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem;}
+.cat-card{position:relative;overflow:hidden;aspect-ratio:4/5;cursor:pointer;}
+.cat-card img{transition:transform 0.8s,filter 0.5s;filter:grayscale(20%)brightness(0.7);}
+.cat-card:hover img{transform:scale(1.06);filter:grayscale(0%)brightness(0.55);}
+.cat-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.85) 0%,transparent 55%);}
+.cat-info{position:absolute;bottom:0;left:0;right:0;padding:1.8rem;}
+.cat-info span{display:block;font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.3em;color:var(--gold);margin-bottom:0.3rem;}
+.cat-info h3{font-family:'Cinzel',serif;font-size:clamp(18px,2vw,24px);font-weight:600;color:var(--white);margin-bottom:0.4rem;}
+.cat-link{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.2em;color:var(--gold-light);}
+
+/* SHOP */
+#shop{padding:5rem 0 4rem;}
+.shop-header{text-align:center;padding:0 4rem;margin-bottom:2.5rem;}
+
+.products-panel{display:none;padding:0 4rem;}
+.products-panel.active{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+
+/* PRODUCT CARD */
+.prod-card{background:var(--card);border:1px solid var(--border);position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.4s;cursor:pointer;}
+.prod-card:hover{border-color:rgba(201,168,76,0.3);transform:translateY(-4px);}
+.prod-img{position:relative;overflow:hidden;aspect-ratio:3/4;}
+.prod-img img{filter:grayscale(10%);transition:transform 0.7s,filter 0.5s;}
+.prod-card:hover .prod-img img{transform:scale(1.07);filter:grayscale(0%);}
+.wish-btn{position:absolute;top:0.7rem;right:0.7rem;width:34px;height:34px;border-radius:50%;background:rgba(8,8,8,0.6);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;z-index:3;}
+.wish-btn svg{width:15px;height:15px;fill:none;stroke:var(--muted);stroke-width:1.5;transition:all 0.3s;}
+.wish-btn.active svg{fill:var(--gold);stroke:var(--gold);}
+.prod-badge{position:absolute;top:0.7rem;left:0.7rem;font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,10px);letter-spacing:0.18em;padding:0.25rem 0.6rem;z-index:2;}
+.badge-new{background:var(--gold);color:var(--black);}
+.badge-exc{background:transparent;border:1px solid var(--gold);color:var(--gold);}
+.prod-quick{position:absolute;bottom:0;left:0;right:0;background:rgba(8,8,8,0.92);padding:0.7rem;transform:translateY(100%);transition:transform 0.3s;}
+.prod-card:hover .prod-quick{transform:translateY(0);}
+@media(hover:none){.prod-quick{transform:translateY(0)!important;}}
+.prod-quick button{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.18em;background:var(--gold);color:var(--black);border:none;padding:0.5rem;width:100%;}
+.prod-info{padding:1rem;}
+.prod-cat{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,10px);letter-spacing:0.25em;color:var(--gold);opacity:0.65;margin-bottom:0.25rem;}
+.prod-name{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.3vw,18px);color:var(--white);margin-bottom:0.3rem;}
+.prod-desc{font-size:clamp(12px,1.1vw,14px);color:var(--muted);margin-bottom:0.6rem;line-height:1.5;}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;}
+.prod-price{font-family:'Cinzel',serif;font-size:clamp(11px,0.9vw,13px);color:var(--gold-light);}
+.prod-sizes{display:flex;gap:0.2rem;}
+.prod-sizes span{font-family:'Cinzel',serif;font-size:clamp(9px,0.75vw,10px);border:1px solid var(--border);color:var(--muted);padding:0.15rem 0.35rem;}
+
+/* ABOUT */
+#about{display:grid;grid-template-columns:1fr 1fr;}
+.about-img{overflow:hidden;height:500px;}
+.about-img img{filter:grayscale(20%);transition:transform 0.9s,filter 0.8s;}
+.about-img:hover img{transform:scale(1.04);filter:grayscale(0%);}
+.about-text{background:var(--deep);padding:5rem 4rem;display:flex;flex-direction:column;justify-content:center;}
+.about-quote{border-left:2px solid var(--gold);padding-left:1.5rem;font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.8vw,24px);font-style:italic;color:var(--cream);line-height:1.65;margin:1.8rem 0;}
+.about-text p{font-size:clamp(14px,1.2vw,17px);color:var(--muted);line-height:1.85;margin-bottom:1rem;}
+
+/* HOW */
+#how{padding:6rem 4rem;background:var(--deep);}
+.how-header{text-align:center;margin-bottom:4rem;}
+.how-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:900px;margin:0 auto;position:relative;}
+.how-steps::before{content:'';position:absolute;top:2rem;left:12%;right:12%;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,0.25),transparent);}
+.how-step{text-align:center;padding:0 1rem;}
+.step-num{width:4rem;height:4rem;border:1px solid rgba(201,168,76,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'Cinzel',serif;font-size:clamp(11px,0.9vw,13px);color:var(--gold);background:var(--deep);position:relative;z-index:1;}
+.step-title{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.2em;color:var(--white);margin-bottom:0.6rem;}
+.step-desc{font-size:clamp(13px,1.1vw,15px);color:var(--muted);line-height:1.65;}
+
+/* CONTACT */
+#contact{padding:6rem 4rem;}
+.contact-wrap{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;}
+.contact-info h2{font-family:'Cinzel',serif;font-size:clamp(22px,2.8vw,36px);color:var(--white);margin-bottom:1rem;line-height:1.2;}
+.contact-info p{font-size:clamp(14px,1.2vw,16px);color:var(--muted);line-height:1.85;margin-bottom:1.5rem;}
+.contact-detail{display:flex;align-items:center;gap:1rem;padding:0.75rem 0;border-bottom:1px solid rgba(201,168,76,0.07);font-size:clamp(13px,1.1vw,15px);color:var(--cream);}
+.contact-detail span:first-child{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.22em;color:var(--gold);min-width:65px;}
+.form-group{display:flex;flex-direction:column;gap:0.35rem;margin-bottom:1rem;}
+.form-group label{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.25em;color:var(--gold);}
+.form-group input,.form-group textarea,.form-group select{background:rgba(255,255,255,0.02);border:1px solid rgba(201,168,76,0.15);padding:0.8rem 0.9rem;color:var(--cream);font-family:'EB Garamond',serif;font-size:clamp(14px,1.2vw,16px);outline:none;transition:border-color 0.3s;resize:none;width:100%;}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold);}
+.form-group select option{background:var(--deep);}
+.form-group textarea{height:90px;}
+.form-submit{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.25em;color:var(--black);background:var(--gold);border:none;padding:0.9rem 2rem;width:100%;transition:background 0.3s;}
+.form-submit:hover{background:var(--gold-light);}
+
+/* FOOTER */
+footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem 4rem;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem;}
+.footer-logo{font-family:'Cinzel',serif;font-size:clamp(12px,1.2vw,16px);font-weight:900;letter-spacing:0.35em;color:var(--gold);}
+.footer-links{display:flex;gap:1.8rem;list-style:none;justify-content:center;}
+.footer-links a{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.2em;color:var(--muted);text-decoration:none;transition:color 0.3s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-copy{font-size:clamp(10px,0.85vw,12px);color:rgba(138,122,101,0.4);text-align:right;}
+
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:600;display:none;backdrop-filter:blur(4px);}
+.overlay.open{display:block;}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;right:0;width:360px;max-width:95vw;height:100vh;background:var(--deep);border-left:1px solid var(--border);z-index:601;transform:translateX(100%);transition:transform 0.4s ease;display:flex;flex-direction:column;}
+.sidebar.open{transform:translateX(0);}
+.sidebar-head{padding:1.5rem 1.8rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.sidebar-head h3{font-family:'Cinzel',serif;font-size:clamp(11px,0.9vw,13px);letter-spacing:0.25em;color:var(--gold);}
+.sidebar-close{background:none;border:none;color:var(--muted);font-size:1.1rem;}
+.sidebar-items{flex:1;overflow-y:auto;padding:1.2rem 1.8rem;display:flex;flex-direction:column;gap:0.8rem;}
+.sidebar-empty{text-align:center;padding:2.5rem 0;}
+.sidebar-empty p{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--muted);font-size:clamp(14px,1.2vw,18px);margin-bottom:1.2rem;}
+.cart-item{display:flex;gap:0.8rem;align-items:center;padding:0.8rem;border:1px solid var(--border);}
+.cart-item-info{flex:1;}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.2vw,17px);color:var(--white);margin-bottom:0.2rem;}
+.cart-item-size{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,10px);letter-spacing:0.18em;color:var(--muted);margin-bottom:0.3rem;}
+.cart-item-price{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);color:var(--gold);}
+.cart-item-remove{background:none;border:none;color:var(--muted);font-size:1rem;}
+.sidebar-foot{padding:1.2rem 1.8rem 1.8rem;border-top:1px solid var(--border);}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.cart-total-row span:first-child{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,11px);letter-spacing:0.2em;color:var(--muted);}
+.cart-total-row span:last-child{font-family:'Cinzel',serif;font-size:clamp(13px,1.1vw,16px);color:var(--gold-light);}
+.btn-checkout{width:100%;font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.22em;background:var(--gold);color:var(--black);border:none;padding:0.9rem;margin-bottom:0.6rem;transition:background 0.3s;}
+.btn-checkout:hover{background:var(--gold-light);}
+.btn-keep{width:100%;font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,11px);letter-spacing:0.18em;background:none;border:1px solid var(--border);color:var(--muted);padding:0.7rem;}
+.cart-note{font-size:clamp(11px,0.9vw,13px);color:var(--muted);text-align:center;margin-top:0.8rem;line-height:1.5;}
+
+/* SIZE MODAL */
+.size-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:700;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px);padding:1rem;}
+.size-overlay.open{display:flex;}
+.size-modal{background:var(--deep);border:1px solid var(--border);width:380px;max-width:100%;padding:2rem;}
+.size-modal h3{font-family:'Cinzel',serif;font-size:clamp(11px,0.9vw,13px);letter-spacing:0.25em;color:var(--gold);margin-bottom:0.35rem;}
+.size-modal-name{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.6vw,22px);font-style:italic;color:var(--white);margin-bottom:1.2rem;}
+.size-label{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.25em;color:var(--muted);margin-bottom:0.7rem;}
+.size-opts{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.size-opt{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);border:1px solid var(--border);color:var(--muted);padding:0.5rem 0.8rem;background:none;transition:all 0.3s;}
+.size-opt.selected{border-color:var(--gold);background:var(--gold);color:var(--black);}
+.size-actions{display:flex;gap:0.6rem;}
+.size-add{flex:1;font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.18em;background:var(--gold);color:var(--black);border:none;padding:0.8rem;}
+.size-cancel{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,11px);background:none;border:1px solid var(--border);color:var(--muted);padding:0.8rem 1rem;}
+
+/* LOGIN */
+.login-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:800;display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px);padding:1rem;overflow-y:auto;}
+.login-overlay.open{display:flex;}
+.login-modal{background:var(--deep);border:1px solid rgba(201,168,76,0.2);width:100%;max-width:400px;position:relative;margin:auto;flex-shrink:0;}
+.login-modal::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.login-close{position:absolute;top:10px;right:14px;background:none;border:none;color:var(--muted);font-size:1rem;z-index:1;}
+.login-tabs{display:flex;border-bottom:1px solid var(--border);}
+.login-tab{flex:1;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.18em;color:var(--muted);background:none;border:none;padding:13px 8px;position:relative;transition:color 0.3s;}
+.login-tab::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform 0.3s;}
+.login-tab.active{color:var(--gold);}
+.login-tab.active::after{transform:scaleX(1);}
+.login-body{padding:18px 20px 22px;}
+.login-panel{display:none;}
+.login-panel.active{display:block;}
+.login-header{text-align:center;margin-bottom:14px;}
+.login-header h2{font-family:'Cinzel',serif;font-size:20px;font-weight:600;color:var(--white);margin-bottom:3px;}
+.login-header p{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--muted);font-size:14px;}
+.login-error{background:rgba(255,80,80,0.08);border:1px solid rgba(255,80,80,0.25);color:rgba(255,140,140,0.9);font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.12em;padding:7px 10px;margin-bottom:10px;display:none;}
+.login-error.show{display:block;}
+.login-fg{display:flex;flex-direction:column;gap:4px;margin-bottom:9px;}
+.login-fg label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;color:var(--gold);}
+.login-fg input{background:rgba(255,255,255,0.02);border:1px solid rgba(201,168,76,0.15);padding:9px 11px;color:var(--cream);font-family:'EB Garamond',serif;font-size:15px;outline:none;transition:border-color 0.3s;width:100%;}
+.login-fg input:focus{border-color:var(--gold);}
+.login-fg input::placeholder{color:var(--muted);opacity:0.55;}
+.name-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.login-submit{width:100%;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.2em;color:var(--black);background:var(--gold);border:none;padding:11px;margin-top:3px;transition:background 0.3s;}
+.login-submit:hover{background:var(--gold-light);}
+.login-divider{display:flex;align-items:center;gap:10px;margin:10px 0;}
+.login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:rgba(201,168,76,0.1);}
+.login-divider span{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.25em;color:var(--muted);}
+.login-link-text{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--muted);font-size:14px;}
+.login-link-text a{color:var(--gold);text-decoration:none;}
+.login-success{text-align:center;padding:20px 0;}
+.login-success .check{width:50px;height:50px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--gold);margin:0 auto 12px;animation:popIn 0.4s ease;}
+@keyframes popIn{from{transform:scale(0.5);opacity:0}to{transform:scale(1);opacity:1}}
+.login-success p{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--cream);margin-bottom:4px;}
+.login-success small{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.2em;color:var(--muted);}
+
+/* USER AVATAR */
+.user-avatar{display:none;align-items:center;gap:0.5rem;position:relative;}
+.avatar-circle{width:30px;height:30px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:12px;font-weight:900;color:var(--black);}
+.avatar-name{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.18em;color:var(--cream);}
+.user-dropdown{position:absolute;top:calc(100%+0.8rem);right:0;background:var(--deep);border:1px solid var(--border);min-width:160px;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.6);z-index:10;}
+.user-avatar:hover .user-dropdown{display:flex;}
+.user-dropdown a,.user-dropdown button{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.18em;color:var(--cream);text-decoration:none;padding:0.8rem 1rem;border:none;background:none;text-align:left;border-bottom:1px solid rgba(201,168,76,0.05);transition:color 0.3s;}
+.user-dropdown a:hover,.user-dropdown button:hover{color:var(--gold);}
+.logout-btn{color:rgba(255,100,100,0.7)!important;}
+
+/* COLLECTION PAGES */
+.col-page{position:fixed;inset:0;z-index:1000;background:var(--black);overflow-y:auto;display:none;}
+.col-page.active{display:block;}
+.col-hero{position:relative;height:55vh;min-height:320px;display:flex;align-items:flex-end;overflow:hidden;}
+.col-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(0.4);}
+.col-hero-content{position:relative;z-index:2;padding:2.5rem 4rem 3rem;width:100%;}
+.col-back{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.2em;color:var(--gold);background:rgba(8,8,8,0.75);border:1px solid rgba(201,168,76,0.35);padding:0.5rem 1.2rem;display:inline-block;backdrop-filter:blur(8px);transition:border-color 0.3s;position:absolute;top:1.2rem;left:1.5rem;z-index:10;}
+.col-eyebrow{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.4em;color:var(--gold);margin-bottom:0.5rem;}
+.col-title{font-family:'Cinzel',serif;font-size:clamp(40px,8vw,100px);font-weight:900;color:var(--white);line-height:0.9;margin-bottom:0.8rem;}
+.col-title em{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;color:var(--gold-light);font-size:0.5em;display:block;}
+.col-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,1.4vw,18px);color:var(--cream);opacity:0.7;max-width:420px;}
+.col-body{padding:3.5rem 4rem 5rem;}
+.col-filter{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:1rem;margin-bottom:2.5rem;}
+.col-count{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.22em;color:var(--muted);}
+.col-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+
+/* PRODUCT DETAIL */
+.pd-page{position:fixed;inset:0;z-index:1100;background:var(--black);overflow-y:auto;display:none;}
+.pd-page.active{display:block;}
+.pd-back{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.2em;color:var(--gold);background:rgba(8,8,8,0.85);border:1px solid rgba(201,168,76,0.3);padding:0.5rem 1.2rem;display:inline-block;backdrop-filter:blur(6px);transition:border-color 0.3s;}
+.pd-layout{display:grid;grid-template-columns:1fr 1fr;}
+.pd-gallery{background:var(--card);}
+.pd-main-img{height:60vh;min-height:350px;overflow:hidden;}
+.pd-main-img img{width:100%;height:100%;object-fit:cover;transition:opacity 0.25s;}
+.pd-thumbs{display:flex;gap:0.5rem;padding:0.5rem;overflow-x:auto;}
+.pd-thumb{width:60px;height:75px;overflow:hidden;flex-shrink:0;border:1px solid transparent;cursor:pointer;transition:border-color 0.3s;}
+.pd-thumb.active{border-color:var(--gold);}
+.pd-thumb img{width:100%;height:100%;object-fit:cover;}
+.pd-info{padding:3rem;overflow-y:auto;}
+.pd-cat{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.3em;color:var(--gold);opacity:0.7;margin-bottom:0.4rem;}
+.pd-name{font-family:'Cinzel',serif;font-size:clamp(20px,2.5vw,36px);font-weight:600;color:var(--white);line-height:1.1;margin-bottom:0.5rem;}
+.pd-price{font-family:'Cinzel',serif;font-size:clamp(14px,1.3vw,20px);color:var(--gold-light);margin-bottom:1rem;}
+.pd-desc{font-size:clamp(14px,1.2vw,16px);color:var(--muted);line-height:1.8;margin-bottom:1.5rem;}
+.pd-divider{height:1px;background:rgba(201,168,76,0.1);margin-bottom:1.5rem;}
+.pd-size-label{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.25em;color:var(--muted);margin-bottom:0.7rem;}
+.pd-sizes{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.pd-size-opt{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);border:1px solid var(--border);color:var(--muted);padding:0.5rem 0.9rem;background:none;transition:all 0.3s;}
+.pd-size-opt.selected{border-color:var(--gold);background:var(--gold);color:var(--black);}
+.pd-actions{display:flex;gap:0.5rem;margin-bottom:1.5rem;}
+.pd-add{flex:1;font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.18em;background:var(--gold);color:var(--black);border:none;padding:0.9rem;transition:background 0.3s;}
+.pd-add:hover{background:var(--gold-light);}
+.pd-wish-btn{width:48px;height:48px;border:1px solid var(--border);background:none;display:flex;align-items:center;justify-content:center;}
+.pd-wish-btn svg{width:20px;height:20px;fill:none;stroke:var(--muted);stroke-width:1.5;transition:all 0.3s;}
+.pd-wish-btn.active svg{fill:var(--gold);stroke:var(--gold);}
+.pd-detail-row{display:flex;justify-content:space-between;padding:0.65rem 0;border-bottom:1px solid rgba(201,168,76,0.06);font-size:clamp(13px,1.1vw,15px);}
+.pd-detail-row span:first-child{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,10px);letter-spacing:0.18em;color:var(--muted);}
+.pd-detail-row span:last-child{color:var(--cream);}
+
+/* BOTTOM NAV — siempre visible en móvil en TODAS las páginas */
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(8,8,8,0.97);border-top:1px solid rgba(201,168,76,0.15);grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom,0px);backdrop-filter:blur(16px);}
+.bn-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 4px 6px;background:none;border:none;color:var(--muted);font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.12em;position:relative;transition:color 0.2s;}
+.bn-btn.active{color:var(--gold);}
+.bn-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.5;}
+.bn-badge{position:absolute;top:4px;right:calc(50% - 18px);width:12px;height:12px;background:var(--gold);color:var(--black);border-radius:50%;font-size:7px;font-weight:900;display:none;align-items:center;justify-content:center;}
+.bn-badge.show{display:flex;}
+
+/* NAV ICONS — carrito y wishlist en desktop */
+.nav-icon-btn{position:relative;background:none;border:none;color:var(--muted);padding:6px;display:flex;align-items:center;justify-content:center;transition:color 0.3s;}
+.nav-icon-btn:hover{color:var(--gold);}
+.nav-icon-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;}
+.nav-icon-badge{position:absolute;top:-2px;right:-4px;min-width:14px;height:14px;background:var(--gold);color:var(--black);border-radius:50%;font-size:8px;font-weight:900;font-family:'Cinzel',serif;display:none;align-items:center;justify-content:center;padding:0 2px;}
+.nav-icon-badge.show{display:flex;}
+@media(max-width:1024px){
+  .nav-icon-btn{display:none;}
+  .btn-signin{display:none;}
+  .hamburger{display:flex!important;}
+}
+
+/* WISH BTN en producto */
+.wish-btn{position:absolute;top:0.6rem;right:0.6rem;z-index:3;width:32px;height:32px;border-radius:50%;background:rgba(8,8,8,0.6);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:all 0.3s;}
+.wish-btn svg{width:14px;height:14px;fill:none;stroke:var(--muted);stroke-width:1.5;transition:all 0.3s;}
+.wish-btn.active svg{fill:var(--gold);stroke:var(--gold);}
+.wish-btn:hover{border-color:var(--gold);}
+
+@media(max-width:768px){
+  .bottom-nav{display:grid;}
+  body{padding-bottom:52px;}
+  .nav-cart-mobile{display:flex;align-items:center;justify-content:center;}
+  .col-page,.pd-page{z-index:1000;}
+}
+.nav-cart-mobile{display:none;position:relative;background:none;border:none;color:var(--gold);padding:4px;}
+.nav-cart-mobile svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.5;}
+.cart-dot{position:absolute;top:0;right:0;width:8px;height:8px;background:var(--gold);border-radius:50%;display:none;}
+.cart-dot.show{display:block;}
+
+/* TOAST */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--deep);border:1px solid var(--gold);color:var(--cream);font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.2em;padding:0.7rem 1.8rem;z-index:9999;transition:transform 0.4s ease,opacity 0.4s ease;white-space:nowrap;opacity:0;pointer-events:none;}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-d1{transition-delay:0.1s;}.reveal-d2{transition-delay:0.2s;}.reveal-d3{transition-delay:0.3s;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){
+  .main-nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .btn-signin{display:none;}
+  .hamburger{display:flex;}
+  #categories{padding:5rem 1.5rem 2rem;}
+  .cat-grid{grid-template-columns:1fr 1fr;}
+  .products-panel.active{grid-template-columns:repeat(2,1fr);padding:0 1.5rem;}
+  #about{grid-template-columns:1fr;}
+  .about-img{height:320px;}
+  .about-text{padding:3rem 1.5rem;}
+  #how{padding:4rem 1.5rem;}
+  .how-steps{grid-template-columns:repeat(2,1fr);}
+  .how-steps::before{display:none;}
+  #contact{padding:4rem 1.5rem;}
+  .contact-wrap{grid-template-columns:1fr;gap:2.5rem;max-width:560px;}
+  footer{grid-template-columns:1fr;text-align:center;padding:2rem 1.5rem;}
+  .footer-copy{text-align:center;}
+  .shop-header{padding:0 1.5rem;}
+  .col-grid{grid-template-columns:repeat(2,1fr);}
+  .col-body{padding:2.5rem 1.5rem 4rem;}
+  .col-hero-content{padding:2rem 1.5rem 2.5rem;}
+  .pd-layout{grid-template-columns:1fr;}
+  .pd-info{padding:2rem 1.5rem 4rem;}
+}
+@media(max-width:640px){
+  .main-nav{padding:0.85rem 1rem;}
+  .btn-cart span:not(.cart-badge){display:none;}
+  .btn-cart{padding:0.5rem 0.7rem;}
+  .hero-btns{flex-direction:column;align-items:center;gap:0.7rem;}
+  .divider{padding:1.5rem 1rem;}
+  #categories{padding:5rem 1rem 1.5rem;}
+  .cat-grid{grid-template-columns:1fr;}
+  .cat-card{aspect-ratio:16/9;}
+  .products-panel.active{grid-template-columns:1fr 1fr;padding:0 1rem;gap:0.7rem;}
+  .shop-header{padding:0 1rem;}
+
+  #how{padding:3rem 1rem;}
+  .how-steps{grid-template-columns:1fr 1fr;}
+  #contact{padding:3rem 1rem;}
+  footer{padding:1.8rem 1rem;}
+  .footer-links{flex-wrap:wrap;gap:1rem;}
+  .sidebar{width:100vw;max-width:100vw;}
+  .col-grid{grid-template-columns:1fr 1fr;}
+  .name-row{grid-template-columns:1fr;}
+  .pd-main-img{height:45vw;min-height:250px;}
+  .pd-actions{flex-direction:column;}
+  .pd-wish-btn{width:100%;height:44px;}
+  .toast{white-space:normal;text-align:center;max-width:88vw;}
+}
+@media(max-width:380px){
+  .products-panel.active{grid-template-columns:1fr;}
+  .how-steps{grid-template-columns:1fr;}
+  .col-grid{grid-template-columns:1fr;}
+}
+@media(min-width:1440px){
+  .main-nav{padding:1.5rem 8rem;}
+  #categories,.shop-header,.about-text,#how,#contact,footer{padding-left:8rem;padding-right:8rem;}
+  .products-panel{padding-left:8rem!important;padding-right:8rem!important;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<!-- CART SIDEBAR -->
+<div class="sidebar" id="cartSidebar">
+  <div class="sidebar-head"><h3>YOUR SELECTION</h3><button class="sidebar-close" onclick="closeAll()">✕</button></div>
+  <div class="sidebar-items" id="cartItems"><div class="sidebar-empty"><p>Your selection is empty</p></div></div>
+  <div class="sidebar-foot" id="cartFoot" style="display:none">
+    <div class="cart-total-row"><span>TOTAL</span><span id="cartTotal">$0.00</span></div>
+    <button class="btn-checkout">PROCEED TO CHECKOUT</button>
+    <button class="btn-keep" onclick="closeAll()">CONTINUE SHOPPING</button>
+    <p class="cart-note">Complimentary shipping on orders over $500</p>
+  </div>
+</div>
+
+<!-- WISHLIST SIDEBAR -->
+<div class="sidebar" id="wishSidebar">
+  <div class="sidebar-head"><h3>♡ WISHLIST</h3><button class="sidebar-close" onclick="closeAll()">✕</button></div>
+  <div class="sidebar-items" id="wishItems"><div class="sidebar-empty"><p>Tu wishlist está vacía</p></div></div>
+</div>
+
+<!-- SIZE MODAL -->
+<div class="size-overlay" id="sizeOverlay" onclick="if(event.target===this)closeSizeModal()">
+  <div class="size-modal">
+    <h3>SELECT SIZE</h3>
+    <p class="size-modal-name" id="sizeName"></p>
+    <p class="size-label">AVAILABLE SIZES</p>
+    <div class="size-opts" id="sizeOpts"></div>
+    <div class="size-actions">
+      <button class="size-add" onclick="confirmAdd()">ADD TO SELECTION</button>
+      <button class="size-cancel" onclick="closeSizeModal()">CANCEL</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="login-overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
+  <div class="login-modal">
+    <button class="login-close" onclick="closeLogin()">✕</button>
+    <div class="login-tabs">
+      <button class="login-tab active" id="tab-signin" onclick="switchAuthTab('signin')">SIGN IN</button>
+      <button class="login-tab" id="tab-register" onclick="switchAuthTab('register')">REGISTER</button>
+    </div>
+    <div class="login-body">
+      <div class="login-panel active" id="auth-signin">
+        <div class="login-header"><h2>Welcome Back</h2><p>Access your personal collection</p></div>
+        <div class="login-error" id="signin-err">Incorrect email or password.</div>
+        <div class="login-fg"><label>EMAIL</label><input type="email" id="si-email" placeholder="your@email.com"/></div>
+        <div class="login-fg"><label>PASSWORD</label><input type="password" id="si-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doSignin()"/></div>
+        <button class="login-submit" onclick="doSignin()">ENTER THE MAISON</button>
+        <div class="login-divider"><span>OR</span></div>
+        <p class="login-link-text">New here? <a href="#" onclick="switchAuthTab('register')">Create an account →</a></p>
+      </div>
+      <div class="login-panel" id="auth-register">
+        <div class="login-header"><h2>Join the Maison</h2><p>Create your private account</p></div>
+        <div class="login-error" id="reg-err">Please fill all fields.</div>
+        <div class="name-row">
+          <div class="login-fg"><label>FIRST NAME</label><input type="text" id="reg-first" placeholder="First"/></div>
+          <div class="login-fg"><label>LAST NAME</label><input type="text" id="reg-last" placeholder="Last"/></div>
+        </div>
+        <div class="login-fg"><label>EMAIL</label><input type="email" id="reg-email" placeholder="your@email.com"/></div>
+        <div class="login-fg"><label>PASSWORD</label><input type="password" id="reg-pass" placeholder="Min. 6 characters" onkeydown="if(event.key==='Enter')doRegister()"/></div>
+        <button class="login-submit" onclick="doRegister()">CREATE ACCOUNT</button>
+        <div class="login-divider"><span>OR</span></div>
+        <p class="login-link-text">Already a member? <a href="#" onclick="switchAuthTab('signin')">Sign in →</a></p>
+      </div>
+      <div class="login-panel" id="auth-success">
+        <div class="login-success"><div class="check">✓</div><p id="success-msg">Welcome.</p><small id="success-sub">You are now signed in.</small></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mm-logo">ARLAN WEAR</span>
+  <a href="#" onclick="mobileGo('hero')">HOME</a>
+  <a href="#" onclick="mobileGo('categories')">COLLECTIONS</a>
+  <a href="#" onclick="mobileGo('shop')">SHOP</a>
+  <a href="#" onclick="mobileGo('about')">MAISON</a>
+  <a href="#" onclick="mobileGo('how')">EXPERIENCE</a>
+  <a href="#" onclick="mobileGo('contact')">CONTACT</a>
+  <button class="mm-btn" onclick="closeMobileMenu();openLogin()">SIGN IN / REGISTER</button>
+</div>
+
+<!-- MAIN NAV -->
+<nav class="main-nav">
+  <a href="#" class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">ARLAN WEAR</a>
+  <ul class="nav-links">
+    <li><a href="#categories">COLLECTIONS</a></li>
+    <li><a href="#shop">SHOP</a></li>
+    <li><a href="#about">MAISON</a></li>
+    <li><a href="#how">EXPERIENCE</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+  <div class="nav-right">
+    <!-- Íconos wishlist y carrito — visibles en PC, ocultos en móvil -->
+    <button class="nav-icon-btn" onclick="openWishlist()">
+      <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span class="nav-icon-badge" id="wishIconBadge">0</span>
+    </button>
+    <button class="nav-icon-btn" onclick="openCart()">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" fill="currentColor"/><circle cx="20" cy="21" r="1" fill="currentColor"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="nav-icon-badge" id="cartIconBadge">0</span>
+    </button>
+    <!-- Sign In / Avatar — visible en PC -->
+    <button class="btn-signin" id="navSigninBtn" onclick="openLogin()">⬡ SIGN IN</button>
+    <div class="user-avatar" id="navAvatar">
+      <div class="avatar-circle" id="avatarInitial">A</div>
+      <span class="avatar-name" id="avatarName"></span>
+      <div class="user-dropdown">
+        <a href="#">MY ORDERS</a>
+        <a href="#">MY WISHLIST</a>
+        <a href="#">ACCOUNT</a>
+        <button class="logout-btn" onclick="doLogout()">SIGN OUT</button>
+      </div>
+    </div>
+    <!-- Carrito móvil con punto indicador -->
+    <button class="nav-cart-mobile" id="navCartMobile" onclick="openCart()">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" fill="currentColor"/><circle cx="20" cy="21" r="1" fill="currentColor"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-dot" id="cartDot"></span>
+    </button>
+    <!-- Hamburguesa — siempre visible en móvil -->
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">MAISON DE MODE · PRIMAVERA 2026</p>
+    <h1 class="hero-title">ARLAN<em>Wear</em></h1>
+    <p class="hero-sub">Where silence becomes luxury</p>
+    <div class="hero-btns">
+      <a href="#shop" class="btn-gold">SHOP NOW</a>
+      <a href="#about" class="btn-outline">DISCOVER</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span>NUEVA TEMPORADA · SS 2026 · EDICIÓN LIMITADA</span></div>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <p class="sec-label">COLLECTIONS</p>
+  <h2 class="sec-title">Curated<em>by Season</em></h2>
+  <div class="cat-grid">
+    <div class="cat-card reveal" onclick="goCollection('femme')">
+      <img src="picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg" alt="Femme" loading="lazy"/>
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><span>COLECCIÓN</span><h3>FEMME</h3><span class="cat-link">EXPLORE →</span></div>
+    </div>
+    <div class="cat-card reveal reveal-d1" onclick="goCollection('homme')">
+      <img src="https://picsum.photos/id/1062/800/1000" alt="Homme" loading="lazy"/>
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><span>COLECCIÓN</span><h3>HOMME</h3><span class="cat-link">EXPLORE →</span></div>
+    </div>
+    <div class="cat-card reveal reveal-d2" onclick="goCollection('accessories')">
+      <img src="https://picsum.photos/id/1074/800/1000" alt="Accessories" loading="lazy"/>
+      <div class="cat-overlay"></div>
+      <div class="cat-info"><span>COLECCIÓN</span><h3>ACCESSORIES</h3><span class="cat-link">EXPLORE →</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><span>PIEZAS SELECCIONADAS · MATERIALES PREMIUM</span></div>
+
+<!-- SHOP -->
+<section id="shop">
+  <div class="shop-header">
+    <p class="sec-label">BOUTIQUE</p>
+    <h2 class="sec-title">The<em>Collection</em></h2>
+  </div>
+  <div class="products-panel active" id="panel-all">
+<div class="prod-card reveal" onclick="openPD('robe')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="woman-fancy-black-dress.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openSize('Robe Élégante Noir','$1,280',['XS','S','M','L'])">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Élégante Noir</p><p class="prod-desc">Seda italiana con caída impecable.</p><div class="prod-footer"><span class="prod-price">$1,280</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d1" onclick="openPD('manteau')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('manteau',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="https://picsum.photos/id/1062/600/800" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openSize('Manteau Classique','$2,450',['S','M','L','XL'])">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Manteau Classique</p><p class="prod-desc">Lana merino doble tejido, corte estructurado.</p><div class="prod-footer"><span class="prod-price">$2,450</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d2" onclick="openPD('sac')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('sac',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="https://picsum.photos/id/1074/600/800" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openSize('Sac Minimaliste','$890',['ONE SIZE'])">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">ACCESSORIES</p><p class="prod-name">Sac Minimaliste</p><p class="prod-desc">Cuero de becerro italiano, herrajes dorados.</p><div class="prod-footer"><span class="prod-price">$890</span><div class="prod-sizes"><span>ONE SIZE</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d3" onclick="openPD('blazer')"><div class="prod-img"><button class="wish-btn" onclick="event.stopPropagation();toggleWish('blazer',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openSize('Blazer Sculptural','$1,680',['XS','S','M','L','XL'])">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Blazer Sculptural</p><p class="prod-desc">Silueta arquitectónica, botonería artesanal.</p><div class="prod-footer"><span class="prod-price">$1,680</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+  </div>
+
+</section>
+
+<div class="divider"><span>CRAFTSMANSHIP · HERITAGE · MODERNITY</span></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img"><img src="https://picsum.photos/id/1055/900/600" loading="lazy"/></div>
+  <div class="about-text">
+    <p class="sec-label">MAISON</p>
+    <h2 class="sec-title">Our<em>Philosophy</em></h2>
+    <blockquote class="about-quote">"Luxury is not about excess — it is about the absence of the unnecessary."</blockquote>
+    <p>Arlan Wear nació de una obsesión por el detalle invisible: el forro de una manga, el peso de un botón, la caída exacta de una solapa.</p>
+    <p>Trabajamos con los mejores talleres y telas del mundo, donde el tiempo no se mide en semanas sino en temporadas.</p>
+    <br/><a href="#contact" class="btn-outline">CONTACT THE MAISON</a>
+  </div>
+</section>
+
+<div class="divider"><span>DESDE 2020 · CIUDAD DE MÉXICO · WORLDWIDE</span></div>
+
+<!-- HOW -->
+<section id="how">
+  <div class="how-header"><p class="sec-label">THE EXPERIENCE</p><h2 class="sec-title">How to<em>Acquire a Piece</em></h2></div>
+  <div class="how-steps">
+    <div class="how-step reveal"><div class="step-num">I</div><p class="step-title">DISCOVER</p><p class="step-desc">Explore our curated collections and find pieces that resonate with your aesthetic.</p></div>
+    <div class="how-step reveal reveal-d1"><div class="step-num">II</div><p class="step-title">SELECT</p><p class="step-desc">Choose your size and add to your selection. Each piece is held for 48 hours.</p></div>
+    <div class="how-step reveal reveal-d2"><div class="step-num">III</div><p class="step-title">CONFIRM</p><p class="step-desc">Proceed to our secure checkout. Our team will confirm availability.</p></div>
+    <div class="how-step reveal reveal-d3"><div class="step-num">IV</div><p class="step-title">RECEIVE</p><p class="step-desc">Your piece arrives in our signature packaging within 3–5 business days.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <p class="sec-label">CONTACT</p>
+      <h2>Let us hear<br/>from you</h2>
+      <p>Whether you have a question about a piece or wish to visit our showroom — our team is at your service.</p>
+      <div class="contact-detail"><span>EMAIL</span>maison@arlanwear.com</div>
+      <div class="contact-detail"><span>PHONE</span>+52 55 0000 0000</div>
+      <div class="contact-detail"><span>SHOWROOM</span>Ciudad de México, MX</div>
+      <div class="contact-detail"><span>HOURS</span>Mon–Sat · 10:00–19:00</div>
+    </div>
+    <div>
+      <form onsubmit="return false">
+        <div class="form-group"><label>FULL NAME</label><input type="text" placeholder="Your name"/></div>
+        <div class="form-group"><label>EMAIL</label><input type="email" placeholder="your@email.com"/></div>
+        <div class="form-group"><label>SUBJECT</label><select><option>General Inquiry</option><option>Order Status</option><option>Showroom Visit</option><option>Press & Collaborations</option></select></div>
+        <div class="form-group"><label>MESSAGE</label><textarea placeholder="How can we assist you?"></textarea></div>
+        <button class="form-submit" type="button">SEND MESSAGE</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">ARLAN WEAR</span>
+  <ul class="footer-links"><li><a href="#">PRIVACY</a></li><li><a href="#">RETURNS</a></li><li><a href="#">SHIPPING</a></li><li><a href="#">INSTAGRAM</a></li></ul>
+  <span class="footer-copy">© 2026 ARLAN WEAR. ALL RIGHTS RESERVED.</span>
+</footer>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bn-btn active" id="bn-home" onclick="closeAll();document.querySelectorAll('.col-page').forEach(p=>p.classList.remove('active'));document.getElementById('pdPage').classList.remove('active');document.body.style.overflow='';window.scrollTo({top:0,behavior:'smooth'});document.querySelectorAll('.bn-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>HOME
+  </button>
+  <button class="bn-btn" id="bn-shop" onclick="closeAll();document.querySelectorAll('.col-page').forEach(p=>p.classList.remove('active'));document.getElementById('pdPage').classList.remove('active');document.body.style.overflow='';document.getElementById('shop').scrollIntoView({behavior:'smooth'});document.querySelectorAll('.bn-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');">
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" fill="currentColor"/><circle cx="20" cy="21" r="1" fill="currentColor"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>SHOP
+  </button>
+  <button class="bn-btn" id="bn-wish" onclick="document.querySelectorAll('.bn-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');openWishlist();">
+    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>WISHLIST
+    <span class="bn-badge" id="bnWishBadge">0</span>
+  </button>
+  <button class="bn-btn" id="bn-account" onclick="document.querySelectorAll('.bn-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');if(typeof currentUser!=='undefined'&&currentUser)showToast('SIGNED IN AS '+currentUser.first.toUpperCase());else openLogin();">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>ACCOUNT
+  </button>
+</nav>
+
+<!-- COLLECTION PAGES -->
+<div class="col-page" id="col-femme">
+  <div class="col-hero"><div class="col-hero-bg" style="background-image:url('picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg')"></div>
+    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLECCIÓN SS 2026</p><h1 class="col-title">FEMME<em>Colección Mujer</em></h1><p class="col-sub">Piezas de seda, lino y cachemira para la mujer contemporánea.</p></div>
+  </div>
+  <div class="col-body"><div class="col-filter"><span class="col-count">2 PIEZAS</span></div>
+    <div class="col-grid">
+      <div class="prod-card" onclick="openPD('robe')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="woman-fancy-black-dress.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openSize('Robe Élégante Noir','$1,280',['XS','S','M','L'])">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Élégante Noir</p><p class="prod-desc">Seda italiana con caída impecable.</p><div class="prod-footer"><span class="prod-price">$1,280</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('blazer')"><div class="prod-img"><button class="wish-btn" onclick="event.stopPropagation();toggleWish('blazer',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openSize('Blazer Sculptural','$1,680',['XS','S','M','L','XL'])">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Blazer Sculptural</p><p class="prod-desc">Silueta arquitectónica, botonería artesanal.</p><div class="prod-footer"><span class="prod-price">$1,680</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="col-page" id="col-homme">
+  <div class="col-hero"><div class="col-hero-bg" style="background-image:url('https://picsum.photos/id/1062/1800/1000')"></div>
+    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLECCIÓN SS 2026</p><h1 class="col-title">HOMME<em>Colección Hombre</em></h1><p class="col-sub">Sastrería de precisión para el hombre de carácter.</p></div>
+  </div>
+  <div class="col-body"><div class="col-filter"><span class="col-count">1 PIEZA</span></div>
+    <div class="col-grid">
+      <div class="prod-card" onclick="openPD('manteau')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('manteau',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="https://picsum.photos/id/1062/600/800" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openSize('Manteau Classique','$2,450',['S','M','L','XL'])">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Manteau Classique</p><p class="prod-desc">Lana merino doble tejido, corte estructurado.</p><div class="prod-footer"><span class="prod-price">$2,450</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="col-page" id="col-accessories">
+  <div class="col-hero"><div class="col-hero-bg" style="background-image:url('https://picsum.photos/id/1074/1800/1000')"></div>
+    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLECCIÓN SS 2026</p><h1 class="col-title">ACCESSORIES<em>Accesorios</em></h1><p class="col-sub">Cuero artesanal y metales nobles.</p></div>
+  </div>
+  <div class="col-body"><div class="col-filter"><span class="col-count">1 PIEZA</span></div>
+    <div class="col-grid">
+      <div class="prod-card" onclick="openPD('sac')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('sac',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="https://picsum.photos/id/1074/600/800" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openSize('Sac Minimaliste','$890',['ONE SIZE'])">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">ACCESSORIES</p><p class="prod-name">Sac Minimaliste</p><p class="prod-desc">Cuero de becerro italiano, herrajes dorados.</p><div class="prod-footer"><span class="prod-price">$890</span><div class="prod-sizes"><span>ONE SIZE</span></div></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="pd-page" id="pdPage">
+  <button class="pd-back" onclick="closePD()">← BACK</button>
+  <div class="pd-layout">
+    <div class="pd-gallery">
+      <div class="pd-main-img"><img id="pdMainImg" src="" alt=""/></div>
+      <div class="pd-thumbs" id="pdThumbs"></div>
+    </div>
+    <div class="pd-info">
+      <p class="pd-cat" id="pdCat"></p>
+      <h1 class="pd-name" id="pdName"></h1>
+      <p class="pd-price" id="pdPrice"></p>
+      <p class="pd-desc" id="pdDesc"></p>
+      <div class="pd-divider"></div>
+      <p class="pd-size-label">SELECCIONA UNA TALLA</p>
+      <div class="pd-sizes" id="pdSizes"></div>
+      <div class="pd-actions">
+        <button class="pd-add" onclick="pdAddCart()">ADD TO SELECTION</button>
+        <button class="pd-wish-btn" id="pdWishBtn" onclick="pdToggleWish()">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+      </div>
+      <div id="pdDetails"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// CURSOR
+const cur=document.getElementById('cursor'),curR=document.getElementById('cursorRing');
+if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';curR.style.left=e.clientX+'px';curR.style.top=e.clientY+'px';});
+}
+
+// STATE
+let cart=[],wishlist=new Set(),currentUser=null,users={},pendingProduct=null,currentPD=null,pdSelectedSize=null;
+
+// TOAST
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// BOTTOM NAV — desaparece permanentemente al tocar
+function dismissNav(){
+  const nav=document.getElementById('bottomNav');
+  nav.style.display='none';
+  document.body.style.paddingBottom='0';
+}
+
+// MOBILE MENU
+let menuOpen=false;
+function toggleMobileMenu(){
+  menuOpen=!menuOpen;
+  document.getElementById('mobileMenu').classList.toggle('open',menuOpen);
+  document.getElementById('hamburger').classList.toggle('open',menuOpen);
+  document.body.style.overflow=menuOpen?'hidden':'';
+}
+function closeMobileMenu(){
+  menuOpen=false;
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow='';
+}
+function mobileGo(id){
+  closeMobileMenu();
+  // Cerrar cualquier página abierta
+  document.querySelectorAll('.col-page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('pdPage').classList.remove('active');
+  document.body.style.overflow='';
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  },420);
+}
+
+// OVERLAY
+function showOverlay(){document.getElementById('overlay').classList.add('open');document.body.style.overflow='hidden';}
+function hideOverlay(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+function closeAll(){
+  document.getElementById('cartSidebar').classList.remove('open');
+  document.getElementById('wishSidebar').classList.remove('open');
+  hideOverlay();
+}
+
+// CART
+function openCart(){renderCart();document.getElementById('cartSidebar').classList.add('open');showOverlay();}
+function renderCart(){
+  const items=document.getElementById('cartItems'),foot=document.getElementById('cartFoot');
+  const dot=document.getElementById('cartDot');
+  const badge=document.getElementById('cartIconBadge');
+  if(cart.length===0){
+    items.innerHTML='<div class="sidebar-empty"><p>Your selection is empty</p></div>';
+    foot.style.display='none';
+    if(dot)dot.classList.remove('show');
+    if(badge){badge.textContent='0';badge.classList.remove('show');}
+  } else {
+    items.innerHTML=cart.map((item,i)=>`<div class="cart-item"><div class="cart-item-info"><p class="cart-item-name">${item.name}</p><p class="cart-item-size">SIZE: ${item.size}</p><p class="cart-item-price">${item.price}</p></div><button class="cart-item-remove" onclick="removeCart(${i})">✕</button></div>`).join('');
+    foot.style.display='block';
+    if(dot)dot.classList.add('show');
+    if(badge){badge.textContent=cart.length;badge.classList.add('show');}
+    const total=cart.reduce((s,i)=>s+parseFloat(i.price.replace(/[$,]/g,'')),0);
+    document.getElementById('cartTotal').textContent='$'+total.toLocaleString('en-US',{minimumFractionDigits:2});
+  }
+}
+function removeCart(i){cart.splice(i,1);renderCart();}
+
+// WISHLIST
+function openWishlist(){renderWishlist();document.getElementById('wishSidebar').classList.add('open');showOverlay();}
+function renderWishlist(){
+  const el=document.getElementById('wishItems');
+  const bnBadge=document.getElementById('bnWishBadge');
+  const wishBadge=document.getElementById('wishIconBadge');
+  if(wishlist.size===0){el.innerHTML='<div class="sidebar-empty"><p>Tu wishlist está vacía</p></div>';}
+  else{el.innerHTML=[...wishlist].map(id=>{const p=PRODUCTS[id];return`<div class="cart-item"><div class="cart-item-info"><p class="cart-item-name">${p.name}</p><p class="cart-item-price">${p.price}</p></div><button class="cart-item-remove" onclick="removeWish('${id}')">✕</button></div>`;}).join('');}
+  if(bnBadge){bnBadge.textContent=wishlist.size;bnBadge.classList.toggle('show',wishlist.size>0);}
+  if(wishBadge){wishBadge.textContent=wishlist.size;wishBadge.classList.toggle('show',wishlist.size>0);}
+}
+function toggleWish(id,btn){
+  if(wishlist.has(id)){wishlist.delete(id);btn.classList.remove('active');showToast('REMOVED FROM WISHLIST');}
+  else{wishlist.add(id);btn.classList.add('active');showToast('ADDED TO WISHLIST');}
+  renderWishlist();
+}
+function removeWish(id){wishlist.delete(id);renderWishlist();}
+
+// SIZE MODAL
+function openSize(name,price,sizes){
+  pendingProduct={name,price};
+  document.getElementById('sizeName').textContent=name;
+  document.getElementById('sizeOpts').innerHTML=sizes.map(s=>`<button class="size-opt" onclick="selectSize(this,'${s}')">${s}</button>`).join('');
+  document.getElementById('sizeOverlay').classList.add('open');
+}
+function closeSizeModal(){document.getElementById('sizeOverlay').classList.remove('open');pendingProduct=null;}
+function selectSize(btn,size){document.querySelectorAll('.size-opt').forEach(b=>b.classList.remove('selected'));btn.classList.add('selected');pendingProduct.size=size;}
+function confirmAdd(){
+  if(!pendingProduct?.size){showToast('PLEASE SELECT A SIZE');return;}
+  cart.push({...pendingProduct});closeSizeModal();renderCart();showToast('ADDED — '+pendingProduct.name);
+}
+
+// SHOP TABS
+function switchShopTab(btn,panel){
+  document.querySelectorAll('.cat-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.products-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');document.getElementById('panel-'+panel).classList.add('active');
+}
+
+// COLLECTION PAGES
+function goCollection(name){
+  document.querySelectorAll('.col-page').forEach(p=>p.classList.remove('active'));
+  const page=document.getElementById('col-'+name);
+  if(page){page.classList.add('active');page.scrollTop=0;document.body.style.overflow='hidden';}
+}
+function closeCollection(){
+  document.querySelectorAll('.col-page').forEach(p=>p.classList.remove('active'));
+  document.body.style.overflow='';
+}
+
+// PRODUCTS DATA
+const PRODUCTS={
+  robe:{cat:'FEMME',name:'Robe Élégante Noir',price:'$1,280',desc:'Seda italiana de la más alta calidad. Caída impecable que abraza la silueta con elegancia sobria. Cierre lateral oculto, forro completo en seda de color marfil.',sizes:['XS','S','M','L'],imgs:['woman-fancy-black-dress.jpg','woman-fancy-black-dress.jpg','cropped-stock-photo-incognito-woman-emerald-dress-black-heels-walking-from-camera-street.jpg'],details:[['MATERIAL','100% Seda italiana'],['ORIGEN','Milano, Italia'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
+  manteau:{cat:'HOMME',name:'Manteau Classique',price:'$2,450',desc:'Lana merino doble tejido con acabado cepillado. Corte estructurado de inspiración militar. Botonería de cuerno natural, forro en jacquard.',sizes:['S','M','L','XL'],imgs:['https://picsum.photos/id/1062/600/800','https://picsum.photos/id/1083/600/800','https://picsum.photos/id/1041/600/800'],details:[['MATERIAL','100% Lana merino'],['ORIGEN','London, UK'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
+  sac:{cat:'ACCESSORIES',name:'Sac Minimaliste',price:'$890',desc:'Cuero de becerro plena flor curtido al vegetal. Herrajes en latón bañado en oro. Capacidad para lo esencial, nada más.',sizes:['ONE SIZE'],imgs:['https://picsum.photos/id/1074/600/800','https://picsum.photos/id/1050/600/800','https://picsum.photos/id/1060/600/800'],details:[['MATERIAL','Cuero vegetal italiano'],['ORIGEN','Firenze, Italia'],['CUIDADO','Acondicionador de cuero'],['ENVÍO','3-5 días hábiles']]},
+  blazer:{cat:'FEMME',name:'Blazer Sculptural',price:'$1,680',desc:'Silueta arquitectónica de hombros estructurados. Botonería artesanal tallada en nácar. Forro en seda salvaje natural.',sizes:['XS','S','M','L','XL'],imgs:['picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg','IMAGEN1.jpg','fashionable-modern-rococo-style.jpg'],details:[['MATERIAL','80% Lana, 20% Seda'],['ORIGEN','Paris, Francia'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]}
+};
+
+// PRODUCT DETAIL
+function openPD(id){
+  const p=PRODUCTS[id];if(!p)return;
+  currentPD=id;pdSelectedSize=null;
+  document.getElementById('pdCat').textContent=p.cat;
+  document.getElementById('pdName').textContent=p.name;
+  document.getElementById('pdPrice').textContent=p.price;
+  document.getElementById('pdDesc').textContent=p.desc;
+  document.getElementById('pdMainImg').src=p.imgs[0];
+  document.getElementById('pdThumbs').innerHTML=p.imgs.map((src,i)=>`<div class="pd-thumb${i===0?' active':''}" onclick="pdSetImg('${src}',this)"><img src="${src}" loading="lazy"/></div>`).join('');
+  document.getElementById('pdSizes').innerHTML=p.sizes.map(s=>`<button class="pd-size-opt" onclick="pdSelectSize(this,'${s}')">${s}</button>`).join('');
+  document.getElementById('pdWishBtn').classList.toggle('active',wishlist.has(id));
+  document.getElementById('pdDetails').innerHTML=p.details.map(d=>`<div class="pd-detail-row"><span>${d[0]}</span><span>${d[1]}</span></div>`).join('');
+  document.getElementById('pdPage').classList.add('active');
+  document.getElementById('pdPage').scrollTop=0;
+  document.body.style.overflow='hidden';
+}
+function closePD(){document.getElementById('pdPage').classList.remove('active');document.body.style.overflow='';}
+function pdSetImg(src,btn){
+  const img=document.getElementById('pdMainImg');
+  img.style.opacity='0';
+  setTimeout(()=>{img.src=src;img.style.opacity='1';},200);
+  document.querySelectorAll('.pd-thumb').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+}
+function pdSelectSize(btn,size){
+  document.querySelectorAll('.pd-size-opt').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');pdSelectedSize=size;
+}
+function pdAddCart(){
+  if(!pdSelectedSize){showToast('PLEASE SELECT A SIZE');return;}
+  const p=PRODUCTS[currentPD];
+  cart.push({name:p.name,price:p.price,size:pdSelectedSize});
+  renderCart();showToast('ADDED — '+p.name);
+}
+function pdToggleWish(){
+  const btn=document.getElementById('pdWishBtn');
+  if(wishlist.has(currentPD)){wishlist.delete(currentPD);btn.classList.remove('active');showToast('REMOVED FROM WISHLIST');}
+  else{wishlist.add(currentPD);btn.classList.add('active');showToast('ADDED TO WISHLIST');}
+  renderWishlist();
+}
+
+// AUTH
+function openLogin(){document.getElementById('loginOverlay').classList.add('open');switchAuthTab('signin');}
+function closeLogin(){document.getElementById('loginOverlay').classList.remove('open');}
+function switchAuthTab(tab){
+  document.querySelectorAll('.login-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.login-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.getElementById('auth-'+tab).classList.add('active');
+  document.querySelectorAll('.login-error').forEach(e=>e.classList.remove('show'));
+}
+function doSignin(){
+  const email=document.getElementById('si-email').value.trim();
+  const pass=document.getElementById('si-pass').value;
+  const err=document.getElementById('signin-err');
+  if(!email||!pass){err.textContent='Please fill all fields.';err.classList.add('show');return;}
+  if(users[email]&&users[email].password===pass){loginSuccess(users[email]);}
+  else{err.textContent='Account not found. Please register.';err.classList.add('show');}
+}
+function doRegister(){
+  const first=document.getElementById('reg-first').value.trim();
+  const last=document.getElementById('reg-last').value.trim();
+  const email=document.getElementById('reg-email').value.trim();
+  const pass=document.getElementById('reg-pass').value;
+  const err=document.getElementById('reg-err');
+  if(!first||!last||!email||!pass){err.textContent='Please fill all fields.';err.classList.add('show');return;}
+  if(pass.length<6){err.textContent='Password must be at least 6 characters.';err.classList.add('show');return;}
+  if(users[email]){err.textContent='Email already registered. Sign in.';err.classList.add('show');return;}
+  users[email]={first,last,email,password:pass};
+  loginSuccess(users[email]);
+}
+function loginSuccess(user){
+  currentUser=user;
+  document.getElementById('success-msg').textContent='Welcome, '+user.first+'.';
+  document.getElementById('success-sub').textContent='You are now part of the Maison.';
+  document.querySelectorAll('.login-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('auth-success').classList.add('active');
+  setTimeout(()=>{closeLogin();updateNav();showToast('WELCOME, '+user.first.toUpperCase());},1600);
+}
+function doLogout(){currentUser=null;updateNav();showToast('YOU HAVE SIGNED OUT');}
+function updateNav(){
+  const sb=document.getElementById('navSigninBtn'),av=document.getElementById('navAvatar');
+  if(currentUser){sb.style.display='none';av.style.display='flex';document.getElementById('avatarInitial').textContent=currentUser.first[0].toUpperCase();document.getElementById('avatarName').textContent=currentUser.first.toUpperCase();}
+  else{sb.style.display='';av.style.display='none';}
+}
+
+// SCROLL REVEAL
+const revObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revObs.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+// INIT
+updateNav();
+renderCart();
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -26,6 +26,20 @@ img{display:block;width:100%;height:100%;object-fit:cover;}
 .nav-right{display:flex;align-items:center;gap:0.8rem;}
 .btn-signin{font-family:'Cinzel',serif;font-size:clamp(10px,0.85vw,12px);letter-spacing:0.18em;background:none;border:1px solid rgba(201,168,76,0.4);color:var(--gold);padding:0.5rem 1rem;}
 
+/* CURRENCY SWITCHER */
+.currency-switch{position:relative;}
+.currency-btn{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,11px);letter-spacing:0.15em;background:none;border:1px solid rgba(201,168,76,0.3);color:var(--gold);padding:0.42rem 0.65rem;display:flex;align-items:center;gap:0.3rem;transition:border-color 0.3s;}
+.currency-btn:hover{border-color:var(--gold);}
+.currency-btn svg{width:9px;height:9px;stroke:var(--gold);fill:none;stroke-width:2.5;transition:transform 0.3s;}
+.currency-switch.open .currency-btn svg{transform:rotate(180deg);}
+.currency-dropdown{position:absolute;top:calc(100%+0.6rem);right:0;background:var(--deep);border:1px solid var(--border);min-width:195px;display:none;flex-direction:column;z-index:700;box-shadow:0 24px 50px rgba(0,0,0,0.7);}
+.currency-switch.open .currency-dropdown{display:flex;}
+.currency-dropdown button{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.14em;color:var(--cream);background:none;border:none;padding:0.75rem 1rem;text-align:left;border-bottom:1px solid rgba(201,168,76,0.06);transition:color 0.2s,background 0.2s;}
+.currency-dropdown button:last-child{border-bottom:none;}
+.currency-dropdown button:hover{color:var(--gold);background:rgba(201,168,76,0.04);}
+.currency-dropdown button.active-cur{color:var(--gold);}
+@media(max-width:1024px){.currency-switch{display:none;}}
+
 /* HAMBURGER */
 .hamburger{display:none;flex-direction:column;gap:5px;width:36px;height:36px;background:none;border:none;padding:6px;}
 .hamburger span{display:block;width:100%;height:1px;background:var(--gold);transition:transform 0.3s,opacity 0.3s;}
@@ -41,6 +55,10 @@ img{display:block;width:100%;height:100%;object-fit:cover;}
 .mobile-menu a{font-family:'Cinzel',serif;font-size:clamp(26px,7vw,44px);font-weight:600;letter-spacing:0.12em;color:var(--white);text-decoration:none;padding:0.7rem 2rem;border-bottom:1px solid rgba(201,168,76,0.07);width:100%;text-align:center;display:block;transition:color 0.3s;}
 .mobile-menu a:hover,.mobile-menu a:active{color:var(--gold);}
 .mm-btn{margin-top:2rem;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.25em;background:var(--gold);color:var(--black);border:none;padding:0.9rem 2.5rem;}
+/* Mobile currency inside menu */
+.mm-currency{display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center;margin-top:1.5rem;padding:0 2rem;}
+.mm-cur-btn{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.18em;background:none;border:1px solid rgba(201,168,76,0.25);color:var(--muted);padding:0.4rem 0.7rem;transition:all 0.3s;}
+.mm-cur-btn.active-cur{border-color:var(--gold);color:var(--gold);}
 
 /* HERO */
 #hero{height:100vh;min-height:600px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
@@ -84,7 +102,6 @@ img{display:block;width:100%;height:100%;object-fit:cover;}
 /* SHOP */
 #shop{padding:5rem 0 4rem;}
 .shop-header{text-align:center;padding:0 4rem;margin-bottom:2.5rem;}
-
 .products-panel{display:none;padding:0 4rem;}
 .products-panel.active{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;}
 
@@ -294,7 +311,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
 .pd-detail-row span:first-child{font-family:'Cinzel',serif;font-size:clamp(9px,0.8vw,10px);letter-spacing:0.18em;color:var(--muted);}
 .pd-detail-row span:last-child{color:var(--cream);}
 
-/* BOTTOM NAV — siempre visible en móvil en TODAS las páginas */
+/* BOTTOM NAV */
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:2000;background:rgba(8,8,8,0.97);border-top:1px solid rgba(201,168,76,0.15);grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom,0px);backdrop-filter:blur(16px);}
 .bn-btn{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 4px 6px;background:none;border:none;color:var(--muted);font-family:'Cinzel',serif;font-size:8px;letter-spacing:0.12em;position:relative;transition:color 0.2s;}
 .bn-btn.active{color:var(--gold);}
@@ -302,7 +319,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
 .bn-badge{position:absolute;top:4px;right:calc(50% - 18px);width:12px;height:12px;background:var(--gold);color:var(--black);border-radius:50%;font-size:7px;font-weight:900;display:none;align-items:center;justify-content:center;}
 .bn-badge.show{display:flex;}
 
-/* NAV ICONS — carrito y wishlist en desktop */
+/* NAV ICONS */
 .nav-icon-btn{position:relative;background:none;border:none;color:var(--muted);padding:6px;display:flex;align-items:center;justify-content:center;transition:color 0.3s;}
 .nav-icon-btn:hover{color:var(--gold);}
 .nav-icon-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;}
@@ -314,7 +331,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
   .hamburger{display:flex!important;}
 }
 
-/* WISH BTN en producto */
+/* WISH BTN on product */
 .wish-btn{position:absolute;top:0.6rem;right:0.6rem;z-index:3;width:32px;height:32px;border-radius:50%;background:rgba(8,8,8,0.6);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:all 0.3s;}
 .wish-btn svg{width:14px;height:14px;fill:none;stroke:var(--muted);stroke-width:1.5;transition:all 0.3s;}
 .wish-btn.active svg{fill:var(--gold);stroke:var(--gold);}
@@ -375,8 +392,6 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
 }
 @media(max-width:640px){
   .main-nav{padding:0.85rem 1rem;}
-  .btn-cart span:not(.cart-badge){display:none;}
-  .btn-cart{padding:0.5rem 0.7rem;}
   .hero-btns{flex-direction:column;align-items:center;gap:0.7rem;}
   .divider{padding:1.5rem 1rem;}
   #categories{padding:5rem 1rem 1.5rem;}
@@ -384,7 +399,6 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
   .cat-card{aspect-ratio:16/9;}
   .products-panel.active{grid-template-columns:1fr 1fr;padding:0 1rem;gap:0.7rem;}
   .shop-header{padding:0 1rem;}
-
   #how{padding:3rem 1rem;}
   .how-steps{grid-template-columns:1fr 1fr;}
   #contact{padding:3rem 1rem;}
@@ -425,14 +439,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
     <div class="cart-total-row"><span>TOTAL</span><span id="cartTotal">$0.00</span></div>
     <button class="btn-checkout">PROCEED TO CHECKOUT</button>
     <button class="btn-keep" onclick="closeAll()">CONTINUE SHOPPING</button>
-    <p class="cart-note">Complimentary shipping on orders over $500</p>
+    <p class="cart-note" id="cartNote">Complimentary shipping on orders over $500 USD</p>
   </div>
 </div>
 
 <!-- WISHLIST SIDEBAR -->
 <div class="sidebar" id="wishSidebar">
   <div class="sidebar-head"><h3>♡ WISHLIST</h3><button class="sidebar-close" onclick="closeAll()">✕</button></div>
-  <div class="sidebar-items" id="wishItems"><div class="sidebar-empty"><p>Tu wishlist está vacía</p></div></div>
+  <div class="sidebar-items" id="wishItems"><div class="sidebar-empty"><p>Your wishlist is empty</p></div></div>
 </div>
 
 <!-- SIZE MODAL -->
@@ -500,6 +514,14 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
   <a href="#" onclick="mobileGo('how')">EXPERIENCE</a>
   <a href="#" onclick="mobileGo('contact')">CONTACT</a>
   <button class="mm-btn" onclick="closeMobileMenu();openLogin()">SIGN IN / REGISTER</button>
+  <!-- Mobile Currency Selector -->
+  <div class="mm-currency">
+    <button class="mm-cur-btn active-cur" onclick="setCurrency('USD');updateMobileCurBtns(this)">USD</button>
+    <button class="mm-cur-btn" onclick="setCurrency('MXN');updateMobileCurBtns(this)">MXN</button>
+    <button class="mm-cur-btn" onclick="setCurrency('CAD');updateMobileCurBtns(this)">CAD</button>
+    <button class="mm-cur-btn" onclick="setCurrency('EUR');updateMobileCurBtns(this)">EUR</button>
+    <button class="mm-cur-btn" onclick="setCurrency('GBP');updateMobileCurBtns(this)">GBP</button>
+  </div>
 </div>
 
 <!-- MAIN NAV -->
@@ -513,7 +535,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
     <li><a href="#contact">CONTACT</a></li>
   </ul>
   <div class="nav-right">
-    <!-- Íconos wishlist y carrito — visibles en PC, ocultos en móvil -->
+    <!-- Wishlist & Cart icons — desktop -->
     <button class="nav-icon-btn" onclick="openWishlist()">
       <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       <span class="nav-icon-badge" id="wishIconBadge">0</span>
@@ -522,7 +544,22 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
       <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" fill="currentColor"/><circle cx="20" cy="21" r="1" fill="currentColor"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       <span class="nav-icon-badge" id="cartIconBadge">0</span>
     </button>
-    <!-- Sign In / Avatar — visible en PC -->
+    <!-- CURRENCY SWITCHER -->
+    <div class="currency-switch" id="currencySwitch">
+      <button class="currency-btn" onclick="toggleCurrencyMenu()">
+        <span id="currencySymbol">$</span>
+        <span id="currencyLabel">USD</span>
+        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="currency-dropdown" id="currencyDropdown">
+        <button onclick="setCurrency('USD')" class="active-cur">$ USD — US Dollar</button>
+        <button onclick="setCurrency('MXN')">$ MXN — Mexican Peso</button>
+        <button onclick="setCurrency('CAD')">$ CAD — Canadian Dollar</button>
+        <button onclick="setCurrency('EUR')">€ EUR — Euro</button>
+        <button onclick="setCurrency('GBP')">£ GBP — British Pound</button>
+      </div>
+    </div>
+    <!-- Sign In / Avatar -->
     <button class="btn-signin" id="navSigninBtn" onclick="openLogin()">⬡ SIGN IN</button>
     <div class="user-avatar" id="navAvatar">
       <div class="avatar-circle" id="avatarInitial">A</div>
@@ -534,12 +571,12 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
         <button class="logout-btn" onclick="doLogout()">SIGN OUT</button>
       </div>
     </div>
-    <!-- Carrito móvil con punto indicador -->
+    <!-- Mobile cart -->
     <button class="nav-cart-mobile" id="navCartMobile" onclick="openCart()">
       <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1" fill="currentColor"/><circle cx="20" cy="21" r="1" fill="currentColor"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
       <span class="cart-dot" id="cartDot"></span>
     </button>
-    <!-- Hamburguesa — siempre visible en móvil -->
+    <!-- Hamburger -->
     <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
       <span></span><span></span><span></span>
     </button>
@@ -550,7 +587,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">MAISON DE MODE · PRIMAVERA 2026</p>
+    <p class="hero-eyebrow">MAISON DE MODE · SPRING 2026</p>
     <h1 class="hero-title">ARLAN<em>Wear</em></h1>
     <p class="hero-sub">Where silence becomes luxury</p>
     <div class="hero-btns">
@@ -560,7 +597,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
   </div>
 </section>
 
-<div class="divider"><span>NUEVA TEMPORADA · SS 2026 · EDICIÓN LIMITADA</span></div>
+<div class="divider"><span>NEW SEASON · SS 2026 · LIMITED EDITION</span></div>
 
 <!-- CATEGORIES -->
 <section id="categories">
@@ -570,22 +607,22 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
     <div class="cat-card reveal" onclick="goCollection('femme')">
       <img src="picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg" alt="Femme" loading="lazy"/>
       <div class="cat-overlay"></div>
-      <div class="cat-info"><span>COLECCIÓN</span><h3>FEMME</h3><span class="cat-link">EXPLORE →</span></div>
+      <div class="cat-info"><span>COLLECTION</span><h3>FEMME</h3><span class="cat-link">EXPLORE →</span></div>
     </div>
     <div class="cat-card reveal reveal-d1" onclick="goCollection('homme')">
       <img src="pexels-furkanfdemir-6215349.jpg" alt="Homme" loading="lazy"/>
       <div class="cat-overlay"></div>
-      <div class="cat-info"><span>COLECCIÓN</span><h3>HOMME</h3><span class="cat-link">EXPLORE →</span></div>
+      <div class="cat-info"><span>COLLECTION</span><h3>HOMME</h3><span class="cat-link">EXPLORE →</span></div>
     </div>
     <div class="cat-card reveal reveal-d2" onclick="goCollection('accessories')">
       <img src="https://picsum.photos/id/1074/800/1000" alt="Accessories" loading="lazy"/>
       <div class="cat-overlay"></div>
-      <div class="cat-info"><span>COLECCIÓN</span><h3>ACCESSORIES</h3><span class="cat-link">EXPLORE →</span></div>
+      <div class="cat-info"><span>COLLECTION</span><h3>ACCESSORIES</h3><span class="cat-link">EXPLORE →</span></div>
     </div>
   </div>
 </section>
 
-<div class="divider"><span>PIEZAS SELECCIONADAS · MATERIALES PREMIUM</span></div>
+<div class="divider"><span>SELECTED PIECES · PREMIUM MATERIALS</span></div>
 
 <!-- SHOP -->
 <section id="shop">
@@ -594,14 +631,15 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
     <h2 class="sec-title">The<em>Collection</em></h2>
   </div>
   <div class="products-panel active" id="panel-all">
-<div class="prod-card reveal" onclick="openPD('robe')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="woman-fancy-black-dress.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Élégante Noir</p><p class="prod-desc">Seda italiana con caída impecable.</p><div class="prod-footer"><span class="prod-price">$1,280</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
-    <div class="prod-card reveal reveal-d1" onclick="openPD('manteau')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('manteau',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-furkanfdemir-6215349.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('manteau')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Manteau Classique</p><p class="prod-desc">Lana merino doble tejido, corte estructurado.</p><div class="prod-footer"><span class="prod-price">$2,450</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
-    <div class="prod-card reveal reveal-d2" onclick="openPD('sac')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('sac',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="https://picsum.photos/id/1074/600/800" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('sac')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">ACCESSORIES</p><p class="prod-name">Sac Minimaliste</p><p class="prod-desc">Cuero de becerro italiano, herrajes dorados.</p><div class="prod-footer"><span class="prod-price">$890</span><div class="prod-sizes"><span>ONE SIZE</span></div></div></div></div>
-    <div class="prod-card reveal reveal-d3" onclick="openPD('blazer')"><div class="prod-img"><button class="wish-btn" onclick="event.stopPropagation();toggleWish('blazer',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('blazer')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Blazer Sculptural</p><p class="prod-desc">Silueta arquitectónica, botonería artesanal.</p><div class="prod-footer"><span class="prod-price">$1,680</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
-    <div class="prod-card reveal reveal-d4" onclick="openPD('robe_emerald')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe_emerald',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="cropped-stock-photo-incognito-woman-emerald-dress-black-heels-walking-from-camera-street.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe_emerald')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Émeraude</p><p class="prod-desc">Seda esmeralda, corte fluido y elegante.</p><div class="prod-footer"><span class="prod-price">$1,450</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
-    <div class="prod-card reveal reveal-d5" onclick="openPD('robe_gold')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe_gold',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="IMAGEN1.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe_gold')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Dorée</p><p class="prod-desc">Satén dorado, silueta sirena de alta costura.</p><div class="prod-footer"><span class="prod-price">$2,100</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+    <div class="prod-card reveal" onclick="openPD('robe')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="woman-fancy-black-dress.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Élégante Noir</p><p class="prod-desc">Italian silk with impeccable drape.</p><div class="prod-footer"><span class="prod-price" data-usd="1280">$1,280 USD</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d1" onclick="openPD('manteau')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('manteau',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-furkanfdemir-6215349.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('manteau')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Manteau Classique</p><p class="prod-desc">Double-woven merino wool, structured cut.</p><div class="prod-footer"><span class="prod-price" data-usd="2450">$2,450 USD</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d2" onclick="openPD('sac')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('sac',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="https://picsum.photos/id/1074/600/800" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('sac')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">ACCESSORIES</p><p class="prod-name">Sac Minimaliste</p><p class="prod-desc">Italian calfskin leather, gold hardware.</p><div class="prod-footer"><span class="prod-price" data-usd="890">$890 USD</span><div class="prod-sizes"><span>ONE SIZE</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d3" onclick="openPD('blazer')"><div class="prod-img"><button class="wish-btn" onclick="event.stopPropagation();toggleWish('blazer',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('blazer')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Blazer Sculptural</p><p class="prod-desc">Architectural silhouette, artisanal buttons.</p><div class="prod-footer"><span class="prod-price" data-usd="1680">$1,680 USD</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d4" onclick="openPD('robe_emerald')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe_emerald',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="cropped-stock-photo-incognito-woman-emerald-dress-black-heels-walking-from-camera-street.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe_emerald')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Émeraude</p><p class="prod-desc">Emerald silk, fluid and elegant cut.</p><div class="prod-footer"><span class="prod-price" data-usd="1450">$1,450 USD</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d5" onclick="openPD('robe_gold')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe_gold',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="IMAGEN1.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe_gold')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Dorée</p><p class="prod-desc">Gold satin, mermaid silhouette, haute couture.</p><div class="prod-footer"><span class="prod-price" data-usd="2100">$2,100 USD</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d1" onclick="openPD('veston')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('veston',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-gustavo-fring-4975636.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('veston')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Veston Élégant</p><p class="prod-desc">English tweed waistcoat, classic tailored cut.</p><div class="prod-footer"><span class="prod-price" data-usd="1950">$1,950 USD</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
+    <div class="prod-card reveal reveal-d2" onclick="openPD('costume')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('costume',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="man-blue-suit.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('costume')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Costume Bleu Royal</p><p class="prod-desc">Royal blue double-breasted suit, Italian wool.</p><div class="prod-footer"><span class="prod-price" data-usd="3200">$3,200 USD</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
   </div>
-
 </section>
 
 <div class="divider"><span>CRAFTSMANSHIP · HERITAGE · MODERNITY</span></div>
@@ -613,13 +651,13 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
     <p class="sec-label">MAISON</p>
     <h2 class="sec-title">Our<em>Philosophy</em></h2>
     <blockquote class="about-quote">"Luxury is not about excess — it is about the absence of the unnecessary."</blockquote>
-    <p>Arlan Wear nació de una obsesión por el detalle invisible: el forro de una manga, el peso de un botón, la caída exacta de una solapa.</p>
-    <p>Trabajamos con los mejores talleres y telas del mundo, donde el tiempo no se mide en semanas sino en temporadas.</p>
+    <p>Arlan Wear was born from an obsession with the invisible detail: the lining of a sleeve, the weight of a button, the precise fall of a lapel.</p>
+    <p>We work with the world's finest workshops and fabrics, where time is not measured in weeks but in seasons.</p>
     <br/><a href="#contact" class="btn-outline">CONTACT THE MAISON</a>
   </div>
 </section>
 
-<div class="divider"><span>DESDE 2020 · CIUDAD DE MÉXICO · WORLDWIDE</span></div>
+<div class="divider"><span>SINCE 2020 · MEXICO CITY · WORLDWIDE</span></div>
 
 <!-- HOW -->
 <section id="how">
@@ -641,7 +679,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
       <p>Whether you have a question about a piece or wish to visit our showroom — our team is at your service.</p>
       <div class="contact-detail"><span>EMAIL</span>maison@arlanwear.com</div>
       <div class="contact-detail"><span>PHONE</span>+52 55 0000 0000</div>
-      <div class="contact-detail"><span>SHOWROOM</span>Ciudad de México, MX</div>
+      <div class="contact-detail"><span>SHOWROOM</span>Mexico City, MX</div>
       <div class="contact-detail"><span>HOURS</span>Mon–Sat · 10:00–19:00</div>
     </div>
     <div>
@@ -683,39 +721,39 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
 <!-- COLLECTION PAGES -->
 <div class="col-page" id="col-femme">
   <div class="col-hero"><div class="col-hero-bg" style="background-image:url('picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg')"></div>
-    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLECCIÓN SS 2026</p><h1 class="col-title">FEMME<em>Colección Mujer</em></h1><p class="col-sub">Piezas de seda, lino y cachemira para la mujer contemporánea.</p></div>
+    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLLECTION SS 2026</p><h1 class="col-title">FEMME<em>Women's Collection</em></h1><p class="col-sub">Pieces in silk, linen and cashmere for the contemporary woman.</p></div>
   </div>
-  <div class="col-body"><div class="col-filter"><span class="col-count">4 PIEZAS</span></div>
+  <div class="col-body"><div class="col-filter"><span class="col-count">4 PIECES</span></div>
     <div class="col-grid">
-      <div class="prod-card" onclick="openPD('robe')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="woman-fancy-black-dress.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Élégante Noir</p><p class="prod-desc">Seda italiana con caída impecable.</p><div class="prod-footer"><span class="prod-price">$1,280</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
-      <div class="prod-card" onclick="openPD('blazer')"><div class="prod-img"><button class="wish-btn" onclick="event.stopPropagation();toggleWish('blazer',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('blazer')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Blazer Sculptural</p><p class="prod-desc">Silueta arquitectónica, botonería artesanal.</p><div class="prod-footer"><span class="prod-price">$1,680</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
-      <div class="prod-card" onclick="openPD('robe_emerald')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe_emerald',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="cropped-stock-photo-incognito-woman-emerald-dress-black-heels-walking-from-camera-street.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe_emerald')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Émeraude</p><p class="prod-desc">Seda esmeralda, corte fluido y elegante.</p><div class="prod-footer"><span class="prod-price">$1,450</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
-      <div class="prod-card" onclick="openPD('robe_gold')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe_gold',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="IMAGEN1.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe_gold')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Dorée</p><p class="prod-desc">Satén dorado, silueta sirena de alta costura.</p><div class="prod-footer"><span class="prod-price">$2,100</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('robe')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="woman-fancy-black-dress.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Élégante Noir</p><p class="prod-desc">Italian silk with impeccable drape.</p><div class="prod-footer"><span class="prod-price" data-usd="1280">$1,280 USD</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('blazer')"><div class="prod-img"><button class="wish-btn" onclick="event.stopPropagation();toggleWish('blazer',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('blazer')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Blazer Sculptural</p><p class="prod-desc">Architectural silhouette, artisanal buttons.</p><div class="prod-footer"><span class="prod-price" data-usd="1680">$1,680 USD</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('robe_emerald')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe_emerald',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="cropped-stock-photo-incognito-woman-emerald-dress-black-heels-walking-from-camera-street.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe_emerald')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Émeraude</p><p class="prod-desc">Emerald silk, fluid and elegant cut.</p><div class="prod-footer"><span class="prod-price" data-usd="1450">$1,450 USD</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('robe_gold')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('robe_gold',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="IMAGEN1.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('robe_gold')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">FEMME</p><p class="prod-name">Robe Dorée</p><p class="prod-desc">Gold satin, mermaid silhouette, haute couture.</p><div class="prod-footer"><span class="prod-price" data-usd="2100">$2,100 USD</span><div class="prod-sizes"><span>XS</span><span>S</span><span>M</span><span>L</span></div></div></div></div>
     </div>
   </div>
 </div>
 
 <div class="col-page" id="col-homme">
   <div class="col-hero"><div class="col-hero-bg" style="background-image:url('pexels-furkanfdemir-6215349.jpg')"></div>
-    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLECCIÓN SS 2026</p><h1 class="col-title">HOMME<em>Colección Hombre</em></h1><p class="col-sub">Sastrería de precisión para el hombre de carácter.</p></div>
+    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLLECTION SS 2026</p><h1 class="col-title">HOMME<em>Men's Collection</em></h1><p class="col-sub">Precision tailoring for the man of character.</p></div>
   </div>
-  <div class="col-body"><div class="col-filter"><span class="col-count">4 PIEZAS</span></div>
+  <div class="col-body"><div class="col-filter"><span class="col-count">4 PIECES</span></div>
     <div class="col-grid">
-      <div class="prod-card" onclick="openPD('manteau')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('manteau',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-furkanfdemir-6215349.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('manteau')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Manteau Classique</p><p class="prod-desc">Lana merino doble tejido, corte estructurado.</p><div class="prod-footer"><span class="prod-price">$2,450</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
-      <div class="prod-card" onclick="openPD('veston')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('veston',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-gustavo-fring-4975636.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('veston')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Veston Élégant</p><p class="prod-desc">Chaleco de tweed inglés, corte sastre clásico.</p><div class="prod-footer"><span class="prod-price">$1,950</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
-      <div class="prod-card" onclick="openPD('pardessus')"><div class="prod-img"><button class="wish-btn" onclick="event.stopPropagation();toggleWish('pardessus',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-abdurrahim-israfilov-537700999-22937621.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('pardessus')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Pardessus Noir</p><p class="prod-desc">Abrigo largo negro, lana virgen y cuero italiano.</p><div class="prod-footer"><span class="prod-price">$2,800</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
-      <div class="prod-card" onclick="openPD('costume')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('costume',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="man-blue-suit.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('costume')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Costume Bleu Royal</p><p class="prod-desc">Traje azul real de doble botonadura, lana italiana.</p><div class="prod-footer"><span class="prod-price">$3,200</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('manteau')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('manteau',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-furkanfdemir-6215349.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('manteau')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Manteau Classique</p><p class="prod-desc">Double-woven merino wool, structured cut.</p><div class="prod-footer"><span class="prod-price" data-usd="2450">$2,450 USD</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('veston')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('veston',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-gustavo-fring-4975636.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('veston')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Veston Élégant</p><p class="prod-desc">English tweed waistcoat, classic tailored cut.</p><div class="prod-footer"><span class="prod-price" data-usd="1950">$1,950 USD</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('pardessus')"><div class="prod-img"><button class="wish-btn" onclick="event.stopPropagation();toggleWish('pardessus',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="pexels-abdurrahim-israfilov-537700999-22937621.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('pardessus')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Pardessus Noir</p><p class="prod-desc">Long black coat, virgin wool and Italian leather.</p><div class="prod-footer"><span class="prod-price" data-usd="2800">$2,800 USD</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('costume')"><div class="prod-img"><span class="prod-badge badge-exc">EXCLUSIVE</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('costume',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="man-blue-suit.jpg" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('costume')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">HOMME</p><p class="prod-name">Costume Bleu Royal</p><p class="prod-desc">Royal blue double-breasted suit, Italian wool.</p><div class="prod-footer"><span class="prod-price" data-usd="3200">$3,200 USD</span><div class="prod-sizes"><span>S</span><span>M</span><span>L</span><span>XL</span></div></div></div></div>
     </div>
   </div>
 </div>
 
 <div class="col-page" id="col-accessories">
   <div class="col-hero"><div class="col-hero-bg" style="background-image:url('https://picsum.photos/id/1074/1800/1000')"></div>
-    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLECCIÓN SS 2026</p><h1 class="col-title">ACCESSORIES<em>Accesorios</em></h1><p class="col-sub">Cuero artesanal y metales nobles.</p></div>
+    <button class="col-back" onclick="closeCollection()">← BACK</button><div class="col-hero-content"><p class="col-eyebrow">COLLECTION SS 2026</p><h1 class="col-title">ACCESSORIES<em>Fine Accessories</em></h1><p class="col-sub">Artisanal leather and noble metals.</p></div>
   </div>
-  <div class="col-body"><div class="col-filter"><span class="col-count">1 PIEZA</span></div>
+  <div class="col-body"><div class="col-filter"><span class="col-count">1 PIECE</span></div>
     <div class="col-grid">
-      <div class="prod-card" onclick="openPD('sac')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('sac',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="https://picsum.photos/id/1074/600/800" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('sac')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">ACCESSORIES</p><p class="prod-name">Sac Minimaliste</p><p class="prod-desc">Cuero de becerro italiano, herrajes dorados.</p><div class="prod-footer"><span class="prod-price">$890</span><div class="prod-sizes"><span>ONE SIZE</span></div></div></div></div>
+      <div class="prod-card" onclick="openPD('sac')"><div class="prod-img"><span class="prod-badge badge-new">NEW</span><button class="wish-btn" onclick="event.stopPropagation();toggleWish('sac',this)"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button><img src="https://picsum.photos/id/1074/600/800" loading="lazy"/><div class="prod-quick"><button onclick="event.stopPropagation();openPD('sac')">ADD TO SELECTION</button></div></div><div class="prod-info"><p class="prod-cat">ACCESSORIES</p><p class="prod-name">Sac Minimaliste</p><p class="prod-desc">Italian calfskin leather, gold hardware.</p><div class="prod-footer"><span class="prod-price" data-usd="890">$890 USD</span><div class="prod-sizes"><span>ONE SIZE</span></div></div></div></div>
     </div>
   </div>
 </div>
@@ -734,7 +772,7 @@ footer{background:var(--black);border-top:1px solid var(--border);padding:2.5rem
       <p class="pd-price" id="pdPrice"></p>
       <p class="pd-desc" id="pdDesc"></p>
       <div class="pd-divider"></div>
-      <p class="pd-size-label">SELECCIONA UNA TALLA</p>
+      <p class="pd-size-label">SELECT A SIZE</p>
       <div class="pd-sizes" id="pdSizes"></div>
       <div class="pd-actions">
         <button class="pd-add" onclick="pdAddCart()">ADD TO SELECTION</button>
@@ -757,20 +795,71 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
 // STATE
 let cart=[],wishlist=new Set(),currentUser=null,users={},pendingProduct=null,currentPD=null,pdSelectedSize=null;
 
+// ─── CURRENCY SYSTEM ───────────────────────────────────────────────────
+const CURRENCY_RATES={USD:1,MXN:17.5,CAD:1.36,EUR:0.92,GBP:0.79};
+const CURRENCY_SYMBOLS={USD:'$',MXN:'$',CAD:'$',EUR:'€',GBP:'£'};
+let currentCurrency='USD';
+
+function formatPrice(usdBase){
+  const rate=CURRENCY_RATES[currentCurrency];
+  const sym=CURRENCY_SYMBOLS[currentCurrency];
+  const val=Math.round(usdBase*rate);
+  return sym+val.toLocaleString('en-US')+' '+currentCurrency;
+}
+
+function setCurrency(code){
+  currentCurrency=code;
+  // Update nav label
+  document.getElementById('currencyLabel').textContent=code;
+  const syms={USD:'$',MXN:'$',CAD:'$',EUR:'€',GBP:'£'};
+  document.getElementById('currencySymbol').textContent=syms[code]||'$';
+  // Highlight active in dropdown
+  document.querySelectorAll('.currency-dropdown button').forEach(b=>{
+    b.classList.toggle('active-cur', b.textContent.startsWith(syms[code]+' '+code));
+  });
+  document.getElementById('currencySwitch').classList.remove('open');
+  updateAllPrices();
+}
+
+function toggleCurrencyMenu(){
+  document.getElementById('currencySwitch').classList.toggle('open');
+}
+// Close currency dropdown when clicking outside
+document.addEventListener('click',e=>{
+  const cs=document.getElementById('currencySwitch');
+  if(!cs.contains(e.target))cs.classList.remove('open');
+});
+
+function updateAllPrices(){
+  // All product price spans with data-usd
+  document.querySelectorAll('[data-usd]').forEach(el=>{
+    el.textContent=formatPrice(parseFloat(el.dataset.usd));
+  });
+  // If PD page is open, update its price
+  if(currentPD&&document.getElementById('pdPage').classList.contains('active')){
+    document.getElementById('pdPrice').textContent=formatPrice(PRODUCTS[currentPD].basePrice);
+  }
+  // Re-render cart and wishlist with new prices
+  renderCart();
+  renderWishlist();
+}
+
+function updateMobileCurBtns(clickedBtn){
+  document.querySelectorAll('.mm-cur-btn').forEach(b=>b.classList.remove('active-cur'));
+  clickedBtn.classList.add('active-cur');
+  // Also update desktop dropdown label
+  const syms={USD:'$',MXN:'$',CAD:'$',EUR:'€',GBP:'£'};
+  document.getElementById('currencyLabel').textContent=currentCurrency;
+  document.getElementById('currencySymbol').textContent=syms[currentCurrency]||'$';
+}
+// ────────────────────────────────────────────────────────────────────────
+
 // TOAST
 function showToast(msg){
   const t=document.getElementById('toast');
-  t.textContent=msg;
-  t.classList.add('show');
+  t.textContent=msg;t.classList.add('show');
   clearTimeout(t._timer);
   t._timer=setTimeout(()=>t.classList.remove('show'),2500);
-}
-
-// BOTTOM NAV — desaparece permanentemente al tocar
-function dismissNav(){
-  const nav=document.getElementById('bottomNav');
-  nav.style.display='none';
-  document.body.style.paddingBottom='0';
 }
 
 // MOBILE MENU
@@ -789,14 +878,10 @@ function closeMobileMenu(){
 }
 function mobileGo(id){
   closeMobileMenu();
-  // Cerrar cualquier página abierta
   document.querySelectorAll('.col-page').forEach(p=>p.classList.remove('active'));
   document.getElementById('pdPage').classList.remove('active');
   document.body.style.overflow='';
-  setTimeout(()=>{
-    const el=document.getElementById(id);
-    if(el)el.scrollIntoView({behavior:'smooth'});
-  },420);
+  setTimeout(()=>{const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});},420);
 }
 
 // OVERLAY
@@ -820,12 +905,14 @@ function renderCart(){
     if(dot)dot.classList.remove('show');
     if(badge){badge.textContent='0';badge.classList.remove('show');}
   } else {
-    items.innerHTML=cart.map((item,i)=>`<div class="cart-item"><div class="cart-item-info"><p class="cart-item-name">${item.name}</p><p class="cart-item-size">SIZE: ${item.size}</p><p class="cart-item-price">${item.price}</p></div><button class="cart-item-remove" onclick="removeCart(${i})">✕</button></div>`).join('');
+    items.innerHTML=cart.map((item,i)=>`<div class="cart-item"><div class="cart-item-info"><p class="cart-item-name">${item.name}</p><p class="cart-item-size">SIZE: ${item.size}</p><p class="cart-item-price">${formatPrice(item.usdBase)}</p></div><button class="cart-item-remove" onclick="removeCart(${i})">✕</button></div>`).join('');
     foot.style.display='block';
     if(dot)dot.classList.add('show');
     if(badge){badge.textContent=cart.length;badge.classList.add('show');}
-    const total=cart.reduce((s,i)=>s+parseFloat(i.price.replace(/[$,]/g,'')),0);
-    document.getElementById('cartTotal').textContent='$'+total.toLocaleString('en-US',{minimumFractionDigits:2});
+    const totalUSD=cart.reduce((s,i)=>s+i.usdBase,0);
+    const rate=CURRENCY_RATES[currentCurrency];
+    const sym=CURRENCY_SYMBOLS[currentCurrency];
+    document.getElementById('cartTotal').textContent=sym+Math.round(totalUSD*rate).toLocaleString('en-US')+' '+currentCurrency;
   }
 }
 function removeCart(i){cart.splice(i,1);renderCart();}
@@ -836,8 +923,8 @@ function renderWishlist(){
   const el=document.getElementById('wishItems');
   const bnBadge=document.getElementById('bnWishBadge');
   const wishBadge=document.getElementById('wishIconBadge');
-  if(wishlist.size===0){el.innerHTML='<div class="sidebar-empty"><p>Tu wishlist está vacía</p></div>';}
-  else{el.innerHTML=[...wishlist].map(id=>{const p=PRODUCTS[id];return`<div class="cart-item"><div class="cart-item-info"><p class="cart-item-name">${p.name}</p><p class="cart-item-price">${p.price}</p></div><button class="cart-item-remove" onclick="removeWish('${id}')">✕</button></div>`;}).join('');}
+  if(wishlist.size===0){el.innerHTML='<div class="sidebar-empty"><p>Your wishlist is empty</p></div>';}
+  else{el.innerHTML=[...wishlist].map(id=>{const p=PRODUCTS[id];return`<div class="cart-item"><div class="cart-item-info"><p class="cart-item-name">${p.name}</p><p class="cart-item-price">${formatPrice(p.basePrice)}</p></div><button class="cart-item-remove" onclick="removeWish('${id}')">✕</button></div>`;}).join('');}
   if(bnBadge){bnBadge.textContent=wishlist.size;bnBadge.classList.toggle('show',wishlist.size>0);}
   if(wishBadge){wishBadge.textContent=wishlist.size;wishBadge.classList.toggle('show',wishlist.size>0);}
 }
@@ -849,8 +936,8 @@ function toggleWish(id,btn){
 function removeWish(id){wishlist.delete(id);renderWishlist();}
 
 // SIZE MODAL
-function openSize(name,price,sizes){
-  pendingProduct={name,price};
+function openSize(name,usdBase,sizes){
+  pendingProduct={name,usdBase};
   document.getElementById('sizeName').textContent=name;
   document.getElementById('sizeOpts').innerHTML=sizes.map(s=>`<button class="size-opt" onclick="selectSize(this,'${s}')">${s}</button>`).join('');
   document.getElementById('sizeOverlay').classList.add('open');
@@ -880,17 +967,17 @@ function closeCollection(){
   document.body.style.overflow='';
 }
 
-// PRODUCTS DATA
+// PRODUCTS DATA — basePrice always in USD
 const PRODUCTS={
-  robe:{cat:'FEMME',name:'Robe Élégante Noir',price:'$1,280',desc:'Seda italiana de la más alta calidad. Caída impecable que abraza la silueta con elegancia sobria. Cierre lateral oculto, forro completo en seda de color marfil.',sizes:['XS','S','M','L'],imgs:['woman-fancy-black-dress.jpg'],details:[['MATERIAL','100% Seda italiana'],['ORIGEN','Milano, Italia'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
-  manteau:{cat:'HOMME',name:'Manteau Classique',price:'$2,450',desc:'Lana merino doble tejido con acabado cepillado. Corte estructurado de inspiración militar. Botonería de cuerno natural, forro en jacquard.',sizes:['S','M','L','XL'],imgs:['pexels-furkanfdemir-6215349.jpg'],details:[['MATERIAL','100% Lana merino'],['ORIGEN','London, UK'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
-  sac:{cat:'ACCESSORIES',name:'Sac Minimaliste',price:'$890',desc:'Cuero de becerro plena flor curtido al vegetal. Herrajes en latón bañado en oro. Capacidad para lo esencial, nada más.',sizes:['ONE SIZE'],imgs:['https://picsum.photos/id/1074/600/800','https://picsum.photos/id/1050/600/800','https://picsum.photos/id/1060/600/800'],details:[['MATERIAL','Cuero vegetal italiano'],['ORIGEN','Firenze, Italia'],['CUIDADO','Acondicionador de cuero'],['ENVÍO','3-5 días hábiles']]},
-  blazer:{cat:'FEMME',name:'Blazer Sculptural',price:'$1,680',desc:'Silueta arquitectónica de hombros estructurados. Botonería artesanal tallada en nácar. Forro en seda salvaje natural.',sizes:['XS','S','M','L','XL'],imgs:['picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg'],details:[['MATERIAL','80% Lana, 20% Seda'],['ORIGEN','Paris, Francia'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
-  veston:{cat:'HOMME',name:'Veston Élégant',price:'$1,950',desc:'Chaleco de tweed inglés de alta sastrería. Botonería en cuerno natural. Corte ceñido que define la silueta masculina.',sizes:['S','M','L','XL'],imgs:['pexels-gustavo-fring-4975636.jpg'],details:[['MATERIAL','100% Tweed inglés'],['ORIGEN','London, UK'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
-  pardessus:{cat:'HOMME',name:'Pardessus Noir',price:'$2,800',desc:'Abrigo largo en lana virgen con guarnición de cuero italiano. Corte recto estructurado, ideal para el hombre de carácter.',sizes:['S','M','L','XL'],imgs:['pexels-abdurrahim-israfilov-537700999-22937621.jpg'],details:[['MATERIAL','90% Lana virgen, 10% Cuero'],['ORIGEN','Milano, Italia'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
-  costume:{cat:'HOMME',name:'Costume Bleu Royal',price:'$3,200',desc:'Traje de doble botonadura en lana italiana azul real. Pañuelo de bolsillo incluido. Pieza de colección exclusiva.',sizes:['S','M','L','XL'],imgs:['man-blue-suit.jpg'],details:[['MATERIAL','100% Lana italiana'],['ORIGEN','Napoli, Italia'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
-  robe_emerald:{cat:'FEMME',name:'Robe Émeraude',price:'$1,450',desc:'Vestido esmeralda de seda fluida. Silueta elegante con movimiento impecable. Botones dorados artesanales en los puños.',sizes:['XS','S','M','L'],imgs:['cropped-stock-photo-incognito-woman-emerald-dress-black-heels-walking-from-camera-street.jpg'],details:[['MATERIAL','100% Seda'],['ORIGEN','Paris, Francia'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]},
-  robe_gold:{cat:'FEMME',name:'Robe Dorée',price:'$2,100',desc:'Satén dorado de alta costura. Silueta sirena con corset estructurado y cola discreta. Pieza de colección exclusiva.',sizes:['XS','S','M','L'],imgs:['IMAGEN1.jpg'],details:[['MATERIAL','100% Satén italiano'],['ORIGEN','Milano, Italia'],['CUIDADO','Dry clean only'],['ENVÍO','3-5 días hábiles']]}
+  robe:{cat:'FEMME',name:'Robe Élégante Noir',basePrice:1280,desc:'Italian silk of the finest quality. Impeccable drape that embraces the silhouette with sober elegance. Hidden side closure, fully lined in ivory silk.',sizes:['XS','S','M','L'],imgs:['woman-fancy-black-dress.jpg'],details:[['MATERIAL','100% Italian Silk'],['ORIGIN','Milano, Italy'],['CARE','Dry clean only'],['SHIPPING','3–5 Business Days']]},
+  manteau:{cat:'HOMME',name:'Manteau Classique',basePrice:2450,desc:'Double-woven merino wool with brushed finish. Structured military-inspired cut. Natural horn buttons, jacquard lining.',sizes:['S','M','L','XL'],imgs:['pexels-furkanfdemir-6215349.jpg'],details:[['MATERIAL','100% Merino Wool'],['ORIGIN','London, UK'],['CARE','Dry clean only'],['SHIPPING','3–5 Business Days']]},
+  sac:{cat:'ACCESSORIES',name:'Sac Minimaliste',basePrice:890,desc:'Full-grain vegetable-tanned calfskin leather. Brass hardware with gold plating. Capacity for the essentials, nothing more.',sizes:['ONE SIZE'],imgs:['https://picsum.photos/id/1074/600/800','https://picsum.photos/id/1050/600/800','https://picsum.photos/id/1060/600/800'],details:[['MATERIAL','Italian Vegetable Leather'],['ORIGIN','Firenze, Italy'],['CARE','Leather conditioner'],['SHIPPING','3–5 Business Days']]},
+  blazer:{cat:'FEMME',name:'Blazer Sculptural',basePrice:1680,desc:'Architectural silhouette with structured shoulders. Artisanal mother-of-pearl buttons. Wild natural silk lining.',sizes:['XS','S','M','L','XL'],imgs:['picture-charming-caucasian-lady-sits-black-leather-armchair-poses-camera.jpg'],details:[['MATERIAL','80% Wool, 20% Silk'],['ORIGIN','Paris, France'],['CARE','Dry clean only'],['SHIPPING','3–5 Business Days']]},
+  veston:{cat:'HOMME',name:'Veston Élégant',basePrice:1950,desc:'High-tailoring English tweed waistcoat. Natural horn buttons. Fitted cut that defines the masculine silhouette.',sizes:['S','M','L','XL'],imgs:['pexels-gustavo-fring-4975636.jpg'],details:[['MATERIAL','100% English Tweed'],['ORIGIN','London, UK'],['CARE','Dry clean only'],['SHIPPING','3–5 Business Days']]},
+  pardessus:{cat:'HOMME',name:'Pardessus Noir',basePrice:2800,desc:'Long coat in virgin wool with Italian leather trim. Straight structured cut, ideal for the man of character.',sizes:['S','M','L','XL'],imgs:['pexels-abdurrahim-israfilov-537700999-22937621.jpg'],details:[['MATERIAL','90% Virgin Wool, 10% Leather'],['ORIGIN','Milano, Italy'],['CARE','Dry clean only'],['SHIPPING','3–5 Business Days']]},
+  costume:{cat:'HOMME',name:'Costume Bleu Royal',basePrice:3200,desc:'Double-breasted suit in royal blue Italian wool. Pocket square included. Exclusive collector\'s piece.',sizes:['S','M','L','XL'],imgs:['man-blue-suit.jpg'],details:[['MATERIAL','100% Italian Wool'],['ORIGIN','Napoli, Italy'],['CARE','Dry clean only'],['SHIPPING','3–5 Business Days']]},
+  robe_emerald:{cat:'FEMME',name:'Robe Émeraude',basePrice:1450,desc:'Fluid emerald silk dress. Elegant silhouette with impeccable movement. Artisanal gold buttons on the cuffs.',sizes:['XS','S','M','L'],imgs:['cropped-stock-photo-incognito-woman-emerald-dress-black-heels-walking-from-camera-street.jpg'],details:[['MATERIAL','100% Silk'],['ORIGIN','Paris, France'],['CARE','Dry clean only'],['SHIPPING','3–5 Business Days']]},
+  robe_gold:{cat:'FEMME',name:'Robe Dorée',basePrice:2100,desc:'High-couture gold satin. Mermaid silhouette with structured corset and discreet train. Exclusive collector\'s piece.',sizes:['XS','S','M','L'],imgs:['IMAGEN1.jpg'],details:[['MATERIAL','100% Italian Satin'],['ORIGIN','Milano, Italy'],['CARE','Dry clean only'],['SHIPPING','3–5 Business Days']]}
 };
 
 // PRODUCT DETAIL
@@ -899,7 +986,7 @@ function openPD(id){
   currentPD=id;pdSelectedSize=null;
   document.getElementById('pdCat').textContent=p.cat;
   document.getElementById('pdName').textContent=p.name;
-  document.getElementById('pdPrice').textContent=p.price;
+  document.getElementById('pdPrice').textContent=formatPrice(p.basePrice);
   document.getElementById('pdDesc').textContent=p.desc;
   document.getElementById('pdMainImg').src=p.imgs[0];
   document.getElementById('pdThumbs').innerHTML=p.imgs.map((src,i)=>`<div class="pd-thumb${i===0?' active':''}" onclick="pdSetImg('${src}',this)"><img src="${src}" loading="lazy"/></div>`).join('');
@@ -925,7 +1012,7 @@ function pdSelectSize(btn,size){
 function pdAddCart(){
   if(!pdSelectedSize){showToast('PLEASE SELECT A SIZE');return;}
   const p=PRODUCTS[currentPD];
-  cart.push({name:p.name,price:p.price,size:pdSelectedSize});
+  cart.push({name:p.name,usdBase:p.basePrice,size:pdSelectedSize});
   renderCart();showToast('ADDED — '+p.name);
 }
 function pdToggleWish(){
